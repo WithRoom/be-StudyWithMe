@@ -13,5 +13,4 @@ public class StudyController {
     public void test() {
         studyService.test();
     }
-
 }
