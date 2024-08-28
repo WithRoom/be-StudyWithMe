@@ -18,7 +18,7 @@ public class StudyController {
     private final StudyService studyService;
 
     @PostMapping("/kakaoLogin")
-    public String test(@RequestParam String code) {
+    public String test(@RequestBody String code) {
         log.info(code);
         return code;
     }
