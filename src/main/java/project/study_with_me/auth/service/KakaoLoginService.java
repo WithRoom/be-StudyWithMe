@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import project.study_with_me.auth.client.KakaoClient;
+import project.study_with_me.auth.dto.KakaoLoginResponseDto;
 import project.study_with_me.domain.member.repository.MemberRepository;
 
 import static project.study_with_me.auth.text.KakaoTexts.GRANT_TYPE;
@@ -20,7 +21,7 @@ public class KakaoLoginService {
     @Value("${kakao.client_id}") 
     private String clientId;
 
-    public String getAccessTokenFromKakao(String code) {
+    public KakaoLoginResponseDto getAccessTokenFromKakao(String code) {
 
         String result = kakaoClient.getToken(
                 GRANT_TYPE.getText(),
@@ -30,6 +31,9 @@ public class KakaoLoginService {
 
         System.out.println(result);
 
-        return null;
+        return KakaoLoginResponseDto.builder()
+                .accessToken("1")
+                .expireTime("1")
+                .build();
     }
 }
