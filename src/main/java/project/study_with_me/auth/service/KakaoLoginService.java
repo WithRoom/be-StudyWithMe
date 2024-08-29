@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import project.study_with_me.auth.client.KakaoClient;
 import project.study_with_me.auth.dto.KakaoLoginResponseDto;
+import project.study_with_me.auth.dto.KakaoTokenResponseDto;
 import project.study_with_me.domain.member.repository.MemberRepository;
 
 import static project.study_with_me.auth.text.KakaoTexts.GRANT_TYPE;
@@ -23,17 +24,15 @@ public class KakaoLoginService {
 
     public KakaoLoginResponseDto getAccessTokenFromKakao(String code) {
 
-        String result = kakaoClient.getToken(
+        KakaoTokenResponseDto kakaoTokenResponseDto = kakaoClient.getToken(
                 GRANT_TYPE.getText(),
                 clientId,
                 code
         );
 
-        System.out.println(result);
-
         return KakaoLoginResponseDto.builder()
-                .accessToken("1")
-                .expireTime("1")
+                .accessToken(kakaoTokenResponseDto.accessToken)
+                .expireTime(kakaoTokenResponseDto.getExpiresIn())
                 .build();
     }
 }

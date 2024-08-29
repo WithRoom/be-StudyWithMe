@@ -12,5 +12,5 @@ import lombok.NoArgsConstructor;
 public class KakaoLoginResponseDto {
 
     private String accessToken;
-    private String expireTime;
+    private Integer expireTime;
 }
