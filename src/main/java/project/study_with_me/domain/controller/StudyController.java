@@ -24,4 +24,5 @@ public class StudyController {
     public String test1() {
         return "hi";
     }
+
 }
