@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import project.study_with_me.domain.member.entity.Authority;
 import project.study_with_me.domain.member.entity.Member;
 
 @Getter
@@ -14,10 +16,10 @@ import project.study_with_me.domain.member.entity.Member;
 public class KakaoUserResponseDto {
 
     @JsonProperty("id")
-    public String id;
+    private String id;
 
     @JsonProperty("connected_at")
-    public String connectedAt;
+    private String connectedAt;
 
     @JsonProperty("properties")
     private Properties properties;
@@ -76,11 +78,13 @@ public class KakaoUserResponseDto {
         }
     }
 
-    public Member createMember() {
+    public Member createMember(PasswordEncoder passwordEncoder) {
         return Member.builder()
                 .memberId(Long.valueOf(id))
                 .nickName(properties.getNickname())
                 .email(kakaoAccount.getEmail())
+                .sub(passwordEncoder.encode(id))
+                .authority(Authority.ROLE_USER)
                 .build();
     }
 }

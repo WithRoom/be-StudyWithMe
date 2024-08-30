@@ -27,4 +27,11 @@ public class Member {
 
     @Column(name = "profile_image")
     private String profileImage;
+
+    @Column(name = "sub")
+    private String sub; // Token Password 대체 사용
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "authority")
+    private Authority authority;
 }

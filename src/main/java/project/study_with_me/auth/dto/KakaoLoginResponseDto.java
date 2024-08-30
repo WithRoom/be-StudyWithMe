@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class KakaoLoginResponseDto {
 
+    private String grantType;
     private String accessToken;
-    private Integer expireTime;
+    private String expireTime;
 }

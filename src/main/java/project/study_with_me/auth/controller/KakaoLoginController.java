@@ -21,13 +21,9 @@ public class KakaoLoginController {
     private final KakaoLoginService kakaoLoginService;
 
     @Operation(summary = "Kakao Login(회원 가입 및 로그인)")
-    @PostMapping("/kakao")
+    @RequestMapping("/kakao")
     public ResponseEntity<KakaoLoginResponseDto> loginKakao(@RequestBody KakaoLoginRequestDto kakaoLoginRequestDto) {
         KakaoLoginResponseDto responseDto = kakaoLoginService.getAccessTokenFromKakao(kakaoLoginRequestDto.getCode());
-
-        // 위에서 받은 accessToken 으로 Kakao API 로 회원정보 조회 (로그인 및 회원가입)
-        kakaoLoginService.getUserInfo(responseDto.getAccessToken());
-
         return ResponseEntity.ok(responseDto);
     }
 }

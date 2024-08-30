@@ -11,23 +11,23 @@ import lombok.NoArgsConstructor;
 public class KakaoTokenResponseDto {
 
     @JsonProperty("token_type")
-    public String tokenType;
+    private String tokenType;
 
     @JsonProperty("access_token")
-    public String accessToken;
+    private String accessToken;
 
     @JsonProperty("id_token")
-    public String idToken;
+    private String idToken;
 
     @JsonProperty("expires_in")
-    public Integer expiresIn;
+    private Integer expiresIn;
 
     @JsonProperty("refresh_token")
-    public String refreshToken;
+    private String refreshToken;
 
     @JsonProperty("refresh_token_expires_in")
-    public Integer refreshTokenExpiresIn;
+    private Integer refreshTokenExpiresIn;
 
     @JsonProperty("scope")
-    public String scope;
+    private String scope;
 }
