@@ -14,8 +14,9 @@ public class TokenDto {
     private String accessTokenExpireTime;
     private String refreshToken;
 
-    public KakaoLoginResponseDto createKakaoLoginResponseDto() {
+    public KakaoLoginResponseDto createKakaoLoginResponseDto(String grantType) {
         return KakaoLoginResponseDto.builder()
+                .grantType(grantType)
                 .accessToken(accessToken)
                 .expireTime(accessTokenExpireTime)
                 .build();

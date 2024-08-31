@@ -5,7 +5,7 @@ import lombok.Getter;
 @Getter
 public enum KakaoTexts {
 
-    BEARER("Bearer "),
+    BEARER("Bearer"),
     GRANT_TYPE("authorization_code");
 
     private String text;

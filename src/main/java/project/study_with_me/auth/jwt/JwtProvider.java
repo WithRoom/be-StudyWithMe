@@ -119,7 +119,7 @@ public class JwtProvider {
         try {
             Jwts.parser().setSigningKey(key).build().parseClaimsJws(token);
             return true;
-        } catch (io.jsonwebtoken.security.SecurityException | MalformedJwtException e) {
+        } catch (SecurityException | MalformedJwtException e) {
             log.error(INVALID_JWT.getText());
         } catch (ExpiredJwtException e) {
             log.error(EXPIRED_JWT.getText());

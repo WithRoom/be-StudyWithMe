@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import project.study_with_me.auth.dto.KakaoLoginReissueDto;
 import project.study_with_me.auth.dto.KakaoLoginRequestDto;
 import project.study_with_me.auth.dto.KakaoLoginResponseDto;
 import project.study_with_me.auth.service.KakaoLoginService;
@@ -21,9 +22,15 @@ public class KakaoLoginController {
     private final KakaoLoginService kakaoLoginService;
 
     @Operation(summary = "Kakao Login(회원 가입 및 로그인)")
-    @RequestMapping("/kakao")
+    @PostMapping("/kakao")
     public ResponseEntity<KakaoLoginResponseDto> loginKakao(@RequestBody KakaoLoginRequestDto kakaoLoginRequestDto) {
         KakaoLoginResponseDto responseDto = kakaoLoginService.getAccessTokenFromKakao(kakaoLoginRequestDto.getCode());
         return ResponseEntity.ok(responseDto);
+    }
+
+    @Operation(summary = "Kakao Login(토큰 만료 재로그인)")
+    @PostMapping("/kakao/reissue")
+    public ResponseEntity<KakaoLoginResponseDto> reissueKakao(@RequestBody KakaoLoginReissueDto kakaoLoginReissueDto) {
+        return ResponseEntity.ok(new KakaoLoginResponseDto("test", "test", "test"));
     }
 }
