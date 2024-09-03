@@ -30,7 +30,8 @@ public class KakaoLoginController {
 
     @Operation(summary = "Kakao Login(토큰 만료 재로그인)")
     @PostMapping("/kakao/reissue")
-    public ResponseEntity<KakaoLoginResponseDto> reissueKakao(@RequestBody KakaoLoginReissueDto kakaoLoginReissueDto) {
-        return ResponseEntity.ok(new KakaoLoginResponseDto("test1", "test1", "test1"));
+    public ResponseEntity<KakaoLoginResponseDto> reissue(@RequestBody KakaoLoginReissueDto kakaoLoginReissueDto) {
+        KakaoLoginResponseDto kakaoLoginResponseDto = kakaoLoginService.reissue(kakaoLoginReissueDto);
+        return ResponseEntity.ok(kakaoLoginResponseDto);
     }
 }

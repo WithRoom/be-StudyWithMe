@@ -1,5 +1,9 @@
 package project.study_with_me.auth.service;
 
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.MalformedJwtException;
+import io.jsonwebtoken.UnsupportedJwtException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -10,9 +14,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import project.study_with_me.auth.client.KakaoTokenClient;
 import project.study_with_me.auth.client.KakaoUserClient;
-import project.study_with_me.auth.dto.KakaoLoginResponseDto;
-import project.study_with_me.auth.dto.KakaoTokenResponseDto;
-import project.study_with_me.auth.dto.KakaoUserResponseDto;
+import project.study_with_me.auth.dto.*;
+import project.study_with_me.auth.entity.RefreshToken;
 import project.study_with_me.auth.jwt.JwtProvider;
 import project.study_with_me.auth.repository.RefreshTokenRepository;
 import project.study_with_me.auth.util.LoginUtils;
@@ -32,6 +35,8 @@ public class KakaoLoginService {
     private final KakaoUserClient kakaoUserClient;
     private final PasswordEncoder passwordEncoder;
     private final LoginUtils loginUtils;
+    private final JwtProvider jwtProvider;
+    private final RefreshTokenRepository refreshTokenRepository;
 
     @Value("${kakao.client_id}") 
     private String clientId;
@@ -47,6 +52,36 @@ public class KakaoLoginService {
         );
 
         return generateOAuthTokenResponse(responseDto);
+    }
+
+    /**
+     * 토큰 만료 후 재로그인
+     */
+    public KakaoLoginResponseDto reissue(KakaoLoginReissueDto kakaoLoginReissueDto) {
+
+        // accessToken 이 만료되지 않은 경우
+        if (jwtProvider.checkExpireToken(kakaoLoginReissueDto.getAccessToken()).equals("false")) {
+            return kakaoLoginReissueDto.createKakaoLoginResponseDto();
+
+        // accessToken 이 올바르지 않은 경우
+        } else if (jwtProvider.checkExpireToken(kakaoLoginReissueDto.getAccessToken()).equals("error")) {
+            throw new RuntimeException("accessToken 이 유효하지 않습니다.");
+
+        // accessToken 이 만료되지 않은 경우
+        } else {
+            Authentication authentication = jwtProvider.getAuthentication(kakaoLoginReissueDto.getAccessToken());
+
+            RefreshToken refreshToken = refreshTokenRepository.findById(Long.valueOf(authentication.getName()))
+                    .orElseThrow(() -> new RuntimeException("해당 유저의 RefreshToken 이 없습니다."));
+
+            // Token 생성
+            TokenDto tokenDto = jwtProvider.generateTokenDto(authentication);
+
+            // refreshToken Update
+            refreshToken.updateRefreshToken(tokenDto.getRefreshToken());
+
+            return tokenDto.createKakaoLoginResponseDto(BEARER.getText());
+        }
     }
 
     /**
