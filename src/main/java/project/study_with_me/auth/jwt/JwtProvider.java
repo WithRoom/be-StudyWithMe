@@ -135,18 +135,18 @@ public class JwtProvider {
     public String checkExpireToken(String accessToken) {
         try {
             Jwts.parser().setSigningKey(key).build().parseClaimsJws(accessToken);
-            return "false";
+            return FALSE.getText();
         } catch (ExpiredJwtException e) {
-            return "true";
+            return TRUE.getText();
         } catch (SecurityException | MalformedJwtException e) {
             log.error(INVALID_JWT.getText());
-            return "error";
+            return ERROR.getText();
         } catch (UnsupportedJwtException e) {
             log.error(UNSUPPORTED_JWT.getText());
-            return "error";
+            return ERROR.getText();
         } catch (IllegalArgumentException e) {
             log.error(WRONG_JWT.getText());
-            return "error";
+            return ERROR.getText();
         }
     }
 }
