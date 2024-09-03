@@ -11,27 +11,32 @@ import org.springframework.web.bind.annotation.RestController;
 import project.study_with_me.auth.dto.KakaoLoginReissueDto;
 import project.study_with_me.auth.dto.KakaoLoginRequestDto;
 import project.study_with_me.auth.dto.KakaoLoginResponseDto;
+import project.study_with_me.auth.jwt.utils.SecurityUtil;
 import project.study_with_me.auth.service.KakaoLoginService;
 
 @Tag(name = "Auth", description = "Login")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/login")
+@RequestMapping("/oauth")
 public class KakaoLoginController {
 
     private final KakaoLoginService kakaoLoginService;
 
-    @Operation(summary = "Kakao Login(회원 가입 및 로그인)")
-    @PostMapping("/kakao")
+    @Operation(summary = "Kakao OAuth Login(회원 가입 및 로그인)")
+    @PostMapping("/kakao/login")
     public ResponseEntity<KakaoLoginResponseDto> loginKakao(@RequestBody KakaoLoginRequestDto kakaoLoginRequestDto) {
-        KakaoLoginResponseDto responseDto = kakaoLoginService.getAccessTokenFromKakao(kakaoLoginRequestDto.getCode());
-        return ResponseEntity.ok(responseDto);
+        return ResponseEntity.ok(kakaoLoginService.getAccessTokenFromKakao(kakaoLoginRequestDto.getCode()));
     }
 
-    @Operation(summary = "Kakao Login(토큰 만료 재로그인)")
+    @Operation(summary = "Kakao OAuth Logout")
+    @PostMapping("/kakao/logout")
+    public ResponseEntity<String> logoutKakao() {
+        return ResponseEntity.ok(kakaoLoginService.kakaoOAuthLogout(SecurityUtil.getCurrentMemberId()));
+    }
+
+    @Operation(summary = "Kakao (토큰 재발급)")
     @PostMapping("/kakao/reissue")
     public ResponseEntity<KakaoLoginResponseDto> reissue(@RequestBody KakaoLoginReissueDto kakaoLoginReissueDto) {
-        KakaoLoginResponseDto kakaoLoginResponseDto = kakaoLoginService.reissue(kakaoLoginReissueDto);
-        return ResponseEntity.ok(kakaoLoginResponseDto);
+        return ResponseEntity.ok(kakaoLoginService.reissue(kakaoLoginReissueDto));
     }
 }

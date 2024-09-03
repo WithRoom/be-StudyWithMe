@@ -6,7 +6,8 @@ import lombok.Getter;
 public enum KakaoTexts {
 
     BEARER("Bearer"),
-    GRANT_TYPE("authorization_code");
+    GRANT_TYPE("authorization_code"),
+    LOGOUT("Logout Success");
 
     private String text;
 

@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,8 +23,7 @@ import project.study_with_me.auth.util.LoginUtils;
 import project.study_with_me.domain.member.entity.Member;
 import project.study_with_me.domain.member.repository.MemberRepository;
 
-import static project.study_with_me.auth.text.KakaoTexts.BEARER;
-import static project.study_with_me.auth.text.KakaoTexts.GRANT_TYPE;
+import static project.study_with_me.auth.text.KakaoTexts.*;
 
 @Service
 @Slf4j
@@ -55,7 +55,22 @@ public class KakaoLoginService {
     }
 
     /**
-     * 토큰 만료 후 재로그인
+     * Kakao OAuth Logout
+     */
+    public String kakaoOAuthLogout(Long memberId) {
+
+        RefreshToken refreshToken = refreshTokenRepository.findById(memberId)
+                .orElseThrow(() -> new RuntimeException("해당 유저의 refreshToken 이 없습니다."));
+
+        refreshTokenRepository.delete(refreshToken);
+
+        SecurityContextHolder.clearContext();   // 사용자 정보 삭제
+
+        return LOGOUT.getText();
+    }
+
+    /**
+     * 토큰 만료 후 토큰 재발급
      */
     public KakaoLoginResponseDto reissue(KakaoLoginReissueDto kakaoLoginReissueDto) {
 
