@@ -32,7 +32,7 @@ public class StudyService {
         return SUCCESS_CREATE_STUDY.getText();
     }
 
-    public StudyResponseDto studyInfo() {
+    public StudyResponseDto studyInfo(Long memberId) {
 
 
 

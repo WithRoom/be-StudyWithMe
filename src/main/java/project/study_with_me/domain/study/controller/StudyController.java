@@ -28,6 +28,6 @@ public class StudyController {
     @Operation(summary = "스터디 조회")
     @GetMapping("/mypage/info")
     public ResponseEntity<StudyResponseDto> studyInfo() {
-        return ResponseEntity.ok(studyService.studyInfo());
+        return ResponseEntity.ok(studyService.studyInfo(SecurityUtil.getCurrentMemberId()));
     }
 }
