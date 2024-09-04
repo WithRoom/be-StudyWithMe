@@ -14,4 +14,12 @@ public class SwaggerConfig {
                 .packagesToScan("project.study_with_me.auth")
                 .build();
     }
+
+    @Bean
+    public GroupedOpenApi memberApi() {
+        return GroupedOpenApi.builder()
+                .group("member")
+                .packagesToScan("project.study_with_me.domain.member")
+                .build();
+    }
 }

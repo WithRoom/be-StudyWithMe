@@ -1,26 +1,39 @@
 package project.study_with_me.domain.member.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import project.study_with_me.auth.jwt.utils.SecurityUtil;
-import project.study_with_me.domain.member.entity.Member;
-import project.study_with_me.domain.member.repository.MemberRepository;
+import project.study_with_me.domain.member.dto.CreateMemberInfoRequestDto;
+import project.study_with_me.domain.member.dto.MemberInfoRequestDto;
+import project.study_with_me.domain.member.dto.MemberInfoResponseDto;
+import project.study_with_me.domain.member.service.MemberService;
 
+@Tag(name = "유저", description = "유저 정보 조회 및 수정")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/member")
 public class MemberController {
 
-    private final MemberRepository memberRepository;
+    private final MemberService memberService;
 
-    @GetMapping("/info")
-    public String test() {
+    @Operation(summary = "유저 정보 조회")
+    @GetMapping("/mypage/info")
+    public ResponseEntity<MemberInfoResponseDto> memberInfo() {
+        return ResponseEntity.ok(memberService.memberInfo(SecurityUtil.getCurrentMemberId()));
+    }
 
-        Member member = memberRepository.findById(SecurityUtil.getCurrentMemberId())
-                .orElseThrow(() -> new RuntimeException("gd"));
+    @Operation(summary = "유저 디테일 정보 생성")
+    @PostMapping("/create/info")
+    public ResponseEntity<String> createMemberInfo(@RequestBody CreateMemberInfoRequestDto createMemberInfoRequestDto) {
+        return ResponseEntity.ok(memberService.createMemberInfo(createMemberInfoRequestDto, SecurityUtil.getCurrentMemberId()));
+    }
 
-        return member.getEmail();
+    @Operation(summary = "유저 정보 수정")
+    @PostMapping("/mypage/update")
+    public ResponseEntity<String> memberUpdate(@RequestBody MemberInfoRequestDto memberInfoRequestDto) {
+        return ResponseEntity.ok(memberService.memberUpdate(memberInfoRequestDto, SecurityUtil.getCurrentMemberId()));
     }
 }

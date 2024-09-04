@@ -81,7 +81,7 @@ public class KakaoUserResponseDto {
     public Member createMember(PasswordEncoder passwordEncoder) {
         return Member.builder()
                 .memberId(Long.valueOf(id))
-                .nickName(properties.getNickname())
+                .name(properties.getNickname())
                 .email(kakaoAccount.getEmail())
                 .sub(passwordEncoder.encode(id))
                 .authority(Authority.ROLE_USER)

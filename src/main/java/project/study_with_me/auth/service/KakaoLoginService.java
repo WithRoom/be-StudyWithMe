@@ -54,6 +54,7 @@ public class KakaoLoginService {
     /**
      * Kakao OAuth Logout
      */
+    @Transactional
     public String kakaoOAuthLogout(Long memberId) {
 
         RefreshToken refreshToken = refreshTokenRepository.findById(memberId)
