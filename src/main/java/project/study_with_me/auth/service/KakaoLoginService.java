@@ -92,7 +92,7 @@ public class KakaoLoginService {
             // refreshToken Update
             refreshToken.updateRefreshToken(tokenDto.getRefreshToken());
 
-            return tokenDto.createKakaoLoginResponseDto(BEARER.getText());
+            return tokenDto.createKakaoLoginResponseDto(BEARER.getText(), false);
         }
     }
 
@@ -112,7 +112,7 @@ public class KakaoLoginService {
                     Authentication authentication = loginUtils.createAuthentication(member);
 
                     // 인증 정보를 기반으로 TokenDto 생성 및 RefreshToken 저장
-                    KakaoLoginResponseDto kakaoLoginResponseDto = loginUtils.getToken(authentication);
+                    KakaoLoginResponseDto kakaoLoginResponseDto = loginUtils.getToken(authentication, false);
 
                     return kakaoLoginResponseDto;
                 })
@@ -122,7 +122,7 @@ public class KakaoLoginService {
 
                     Authentication authentication = loginUtils.createAuthentication(member);
 
-                    KakaoLoginResponseDto kakaoLoginResponseDto = loginUtils.getToken(authentication);
+                    KakaoLoginResponseDto kakaoLoginResponseDto = loginUtils.getToken(authentication, true);
 
                     return kakaoLoginResponseDto;
                 });

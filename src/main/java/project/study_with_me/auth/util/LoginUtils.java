@@ -41,7 +41,7 @@ public class LoginUtils {
      * 토큰 생성
      */
     @Transactional
-    public KakaoLoginResponseDto getToken(Authentication authentication) {
+    public KakaoLoginResponseDto getToken(Authentication authentication, Boolean firstJoin) {
         // 인증 정보를 기반으로 JWT 생성
         TokenDto tokenDto = jwtProvider.generateTokenDto(authentication);
 
@@ -52,6 +52,6 @@ public class LoginUtils {
 
         refreshTokenRepository.save(refreshToken);
 
-        return tokenDto.createKakaoLoginResponseDto(BEARER.getText());
+        return tokenDto.createKakaoLoginResponseDto(BEARER.getText(), firstJoin);
     }
 }

@@ -14,11 +14,12 @@ public class TokenDto {
     private String accessTokenExpireTime;
     private String refreshToken;
 
-    public KakaoLoginResponseDto createKakaoLoginResponseDto(String grantType) {
+    public KakaoLoginResponseDto createKakaoLoginResponseDto(String grantType, Boolean firstJoin) {
         return KakaoLoginResponseDto.builder()
                 .grantType(grantType)
                 .accessToken(accessToken)
                 .expireTime(accessTokenExpireTime)
+                .firstJoin(firstJoin)
                 .build();
     }
 }

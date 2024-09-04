@@ -14,4 +14,5 @@ public class KakaoLoginResponseDto {
     private String grantType;
     private String accessToken;
     private String expireTime;
+    private Boolean firstJoin; // 회원가입유무
 }
