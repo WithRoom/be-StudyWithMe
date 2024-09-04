@@ -20,7 +20,7 @@ import project.study_with_me.domain.member.repository.MemberRepository;
 
 import static project.study_with_me.auth.jwt.text.JwtTexts.ERROR;
 import static project.study_with_me.auth.jwt.text.JwtTexts.FALSE;
-import static project.study_with_me.auth.text.KakaoTexts.*;
+import static project.study_with_me.text.KakaoTexts.*;
 
 @Service
 @Slf4j

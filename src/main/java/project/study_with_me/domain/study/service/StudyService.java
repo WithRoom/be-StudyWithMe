@@ -10,7 +10,7 @@ import project.study_with_me.domain.study.entity.Schedule;
 import project.study_with_me.domain.study.entity.Study;
 import project.study_with_me.domain.study.repository.StudyRepository;
 
-import static project.study_with_me.domain.study.text.StudyTexts.SUCCESS_CREATE_STUDY;
+import static project.study_with_me.text.StudyTexts.SUCCESS_CREATE_STUDY;
 
 @Service
 @Slf4j

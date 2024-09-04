@@ -14,7 +14,7 @@ import project.study_with_me.auth.jwt.JwtProvider;
 import project.study_with_me.auth.repository.RefreshTokenRepository;
 import project.study_with_me.domain.member.entity.Member;
 
-import static project.study_with_me.auth.text.KakaoTexts.BEARER;
+import static project.study_with_me.text.KakaoTexts.BEARER;
 
 @RequiredArgsConstructor
 @Component

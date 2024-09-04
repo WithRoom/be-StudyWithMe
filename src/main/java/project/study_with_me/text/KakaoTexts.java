@@ -1,4 +1,4 @@
-package project.study_with_me.auth.text;
+package project.study_with_me.text;
 
 import lombok.Getter;
 

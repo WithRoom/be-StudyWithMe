@@ -4,9 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 
-@NoArgsConstructor
+/*@NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@Builder*/
 public class InterestStudy {
 
 
