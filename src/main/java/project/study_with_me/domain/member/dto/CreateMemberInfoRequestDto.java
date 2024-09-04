@@ -1,12 +1,8 @@
 package project.study_with_me.domain.member.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 @Getter
-@NoArgsConstructor
-@AllArgsConstructor
 public class CreateMemberInfoRequestDto {
 
     private String nickName;
