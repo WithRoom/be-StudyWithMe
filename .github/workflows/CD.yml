@@ -18,16 +18,16 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: git pull
-        run: |
-          sudo docker login -u ${{ secrets.DOCKER_ID }} -p ${{ secrets.DOCKERHUB_TOKEN }}
-          git pull
-
       - name: Clean up disk space
         run: |
           sudo rm -rf /usr/local/share/.cache
           sudo apt-get clean
           docker system prune --all --force --volumes
+
+      - name: git pull
+        run: |
+          sudo docker login -u ${{ secrets.DOCKER_ID }} -p ${{ secrets.DOCKERHUB_TOKEN }}
+          git pull
 
       - name: Deploy
         uses: appleboy/ssh-action@v0.1.8
