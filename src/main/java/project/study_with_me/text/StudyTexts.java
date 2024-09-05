@@ -4,7 +4,12 @@ import lombok.Getter;
 
 @Getter
 public enum StudyTexts {
-    SUCCESS_CREATE_STUDY("success Create Study");
+
+    NO_SEARCH_STUDY("해당 스터디가 없습니다."),
+    SUCCESS_CREATE_STUDY("success Create Study"),
+    SUCCESS_INTEREST_STUDY("success Interest Study"),
+    SUCCESS_JOIN_STUDY("success Join Study"),
+    SUCCESS_JOIN_RESPONSE_STUDY("success Join Response Study");
 
     private String text;
 

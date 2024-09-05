@@ -33,7 +33,7 @@ public class Study {
     private String type;    // 온, 오프라인
 
     @Column(name = "recruit_people")
-    private String recruitPeople; // 모집 인원
+    private Integer recruitPeople; // 모집 인원
 
     @Column(name = "introduction")
     private String introduction;    // 소개

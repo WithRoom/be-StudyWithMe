@@ -1,4 +1,4 @@
-package project.study_with_me.domain.study.dto;
+package project.study_with_me.domain.study.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -34,6 +34,7 @@ public class CreateStudyRequestDto {
                 .period(studySchedule.getPeriod())
                 .startDay(studySchedule.getStartDay())
                 .weekDay(studySchedule.getWeekDay())
+                .state(true)
                 .build();
     }
 }

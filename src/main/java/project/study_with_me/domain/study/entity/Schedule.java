@@ -31,6 +31,9 @@ public class Schedule {
     @Column(name = "time")
     private String time;
 
+    @Column(name = "state")
+    private Boolean state;  // 진행 중 or 종료됨
+
     @OneToOne(mappedBy = "schedule")
     private Study study;
 

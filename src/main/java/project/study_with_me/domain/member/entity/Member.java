@@ -61,7 +61,6 @@ public class Member {
         this.profileImage = memberInfoRequestDto.getProfileImage();
     }
 
-
     public MemberInfoResponseDto createMemberInfoResponseDto() {
         return MemberInfoResponseDto.builder()
                 .name(name)

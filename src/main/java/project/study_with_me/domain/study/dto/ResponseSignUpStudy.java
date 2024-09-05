@@ -4,10 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
-public class InterestStudy {
+public class ResponseSignUpStudy {
 
     private Long studyId;
     private Boolean state;  // 진행 중, 종료됨
