@@ -4,10 +4,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import project.study_with_me.domain.study.dto.GroupLeaderStudy;
-import project.study_with_me.domain.study.dto.InterestStudy;
-import project.study_with_me.domain.study.dto.ParticipationStudy;
-import project.study_with_me.domain.study.dto.SignUpStudy;
 import project.study_with_me.domain.study.dto.request.CreateStudyRequestDto;
 import project.study_with_me.domain.study.dto.request.StudyInterestRequestDto;
 import project.study_with_me.domain.study.dto.request.StudyJoinRequestDto;
@@ -19,8 +15,6 @@ import project.study_with_me.domain.study.repository.StudyJoinRepository;
 import project.study_with_me.domain.study.repository.StudyMemberRepository;
 import project.study_with_me.domain.study.repository.StudyRepository;
 import project.study_with_me.domain.study.utils.DtoUtils;
-
-import java.util.List;
 
 import static project.study_with_me.text.StudyTexts.*;
 
