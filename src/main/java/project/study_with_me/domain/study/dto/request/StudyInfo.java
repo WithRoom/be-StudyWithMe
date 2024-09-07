@@ -5,7 +5,7 @@ import lombok.Getter;
 @Getter
 public class StudyInfo {
 
-    private String studyImage;
+    private String studyImageUrl;
     private String title;
     private String type;    // 온, 오프라인
     private Integer recruitPeople; // 모집 인원

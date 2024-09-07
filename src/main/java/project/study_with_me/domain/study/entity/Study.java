@@ -23,8 +23,8 @@ public class Study {
     @Column(name = "group_leader")
     private Long groupLeader;
 
-    @Column(name = "study_image")
-    private String studyImage;
+    @Column(name = "study_image_url")
+    private String studyImageUrl;
 
     @Column(name = "title")
     private String title;

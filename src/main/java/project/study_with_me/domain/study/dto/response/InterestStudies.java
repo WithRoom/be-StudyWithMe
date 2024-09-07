@@ -1,7 +1,6 @@
 package project.study_with_me.domain.study.dto.response;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import project.study_with_me.domain.study.dto.InterestStudy;
@@ -19,7 +18,7 @@ public class InterestStudies {
     public InterestStudy createInterestStudy(Study study) {
         return InterestStudy.builder()
                 .studyId(study.getStudyId())
-                .studyImage(study.getStudyImage())
+                .studyImageUrl(study.getStudyImageUrl())
                 .state(study.getSchedule().getState())
                 .type(study.getType())
                 .title(study.getTitle())

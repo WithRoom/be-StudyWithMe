@@ -19,7 +19,7 @@ public class SignUpStudies {
     public SignUpStudy createSignUpStudy(Study study) {
         return SignUpStudy.builder()
                 .studyId(study.getStudyId())
-                .studyImage(study.getStudyImage())
+                .studyImageUrl(study.getStudyImageUrl())
                 .state(study.getSchedule().getState())
                 .type(study.getType())
                 .title(study.getTitle())

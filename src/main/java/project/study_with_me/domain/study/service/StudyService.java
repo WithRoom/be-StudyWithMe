@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 import project.study_with_me.domain.study.dto.request.CreateStudyRequestDto;
 import project.study_with_me.domain.study.dto.request.StudyInterestRequestDto;
 import project.study_with_me.domain.study.dto.request.StudyJoinRequestDto;

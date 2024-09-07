@@ -19,7 +19,7 @@ public class GroupLeaderStudies {
     public GroupLeaderStudy createGroupLeaderStudy(Study study) {
         return GroupLeaderStudy.builder()
                 .studyId(study.getStudyId())
-                .studyImage(study.getStudyImage())
+                .studyImageUrl(study.getStudyImageUrl())
                 .state(study.getSchedule().getState())
                 .type(study.getType())
                 .title(study.getTitle())

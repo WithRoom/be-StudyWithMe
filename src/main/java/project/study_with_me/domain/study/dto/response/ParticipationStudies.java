@@ -18,7 +18,7 @@ public class ParticipationStudies {
     public ParticipationStudy createParticipationStudy(Study study) {
         return ParticipationStudy.builder()
                 .studyId(study.getStudyId())
-                .studyImage(study.getStudyImage())
+                .studyImageUrl(study.getStudyImageUrl())
                 .state(study.getSchedule().getState())
                 .type(study.getType())
                 .title(study.getTitle())

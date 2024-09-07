@@ -18,7 +18,7 @@ public class ResponseSignUpStudies {
     public ResponseSignUpStudy createResponseSignUpStudy(Study study) {
         return ResponseSignUpStudy.builder()
                 .studyId(study.getStudyId())
-                .studyImage(study.getStudyImage())
+                .studyImageUrl(study.getStudyImageUrl())
                 .state(study.getSchedule().getState())
                 .type(study.getType())
                 .title(study.getTitle())

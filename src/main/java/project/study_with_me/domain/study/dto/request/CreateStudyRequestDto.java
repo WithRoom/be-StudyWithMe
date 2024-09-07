@@ -16,7 +16,7 @@ public class CreateStudyRequestDto {
 
     public Study createStudy(Long memberId) {
         return Study.builder()
-                .studyImage(studyInfo.getStudyImage())
+                .studyImageUrl(studyInfo.getStudyImageUrl())
                 .title(studyInfo.getTitle())
                 .groupLeader(memberId)
                 .tag(studyInfo.getTag())
