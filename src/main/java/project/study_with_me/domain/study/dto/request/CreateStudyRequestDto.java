@@ -22,6 +22,7 @@ public class CreateStudyRequestDto {
                 .tag(studyInfo.getTag())
                 .topic(studyInfo.getTopic())
                 .type(studyInfo.getType())
+                .nowPeople(1)
                 .introduction(studyInfo.getIntroduction())
                 .recruitPeople(studyInfo.getRecruitPeople())
                 .build();

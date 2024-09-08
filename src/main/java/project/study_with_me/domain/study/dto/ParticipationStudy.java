@@ -19,4 +19,5 @@ public class ParticipationStudy {
     private String difficulty;  // 난이도
     private String title;
     private Integer recruitPeople;   // 참여인원
+    private Integer nowPeople;  // 현재인원
 }

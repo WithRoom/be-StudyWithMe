@@ -24,6 +24,7 @@ public class GroupLeaderStudies {
                 .type(study.getType())
                 .title(study.getTitle())
                 .topic(study.getTopic())
+                .nowPeople(study.getNowPeople())
                 .difficulty(study.getDifficulty())
                 .recruitPeople(study.getRecruitPeople())
                 .build();

@@ -47,9 +47,16 @@ public class Study {
     @Column(name = "tag")
     private String tag; // 검색 태그
 
+    @Column(name = "now_people")
+    private Integer nowPeople;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "schedule_id", referencedColumnName = "schedule_id")
     private Schedule schedule;
+
+    public void updateStudyNowPeople() {
+        this.nowPeople++;
+    }
 
     // 연관관계 편의 메소드
     public void setSchedule(Schedule schedule) {

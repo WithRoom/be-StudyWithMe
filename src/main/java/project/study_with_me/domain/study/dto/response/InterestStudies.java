@@ -21,6 +21,7 @@ public class InterestStudies {
                 .studyImageUrl(study.getStudyImageUrl())
                 .state(study.getSchedule().getState())
                 .type(study.getType())
+                .nowPeople(study.getNowPeople())
                 .title(study.getTitle())
                 .topic(study.getTopic())
                 .difficulty(study.getDifficulty())

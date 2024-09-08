@@ -22,6 +22,7 @@ public class ParticipationStudies {
                 .state(study.getSchedule().getState())
                 .type(study.getType())
                 .title(study.getTitle())
+                .nowPeople(study.getNowPeople())
                 .topic(study.getTopic())
                 .difficulty(study.getDifficulty())
                 .recruitPeople(study.getRecruitPeople())

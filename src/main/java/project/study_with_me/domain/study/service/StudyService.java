@@ -78,6 +78,14 @@ public class StudyService {
                     .build();
 
             studyMemberRepository.save(studyMember);
+
+            /** NOTE
+             * 좀 더 다른 로직 생각해봐야 함
+             */
+            Study study = studyRepository.findById(responseJoinStudyRequestDto.getStudyId())
+                    .orElseThrow(() -> new RuntimeException("해당 스터디가 없습니다."));
+
+            study.updateStudyNowPeople();
         }
 
         studyJoinRepository.delete(studyJoin);
