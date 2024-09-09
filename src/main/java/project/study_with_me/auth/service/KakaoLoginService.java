@@ -128,4 +128,12 @@ public class KakaoLoginService {
                     return kakaoLoginResponseDto;
                 });
     }
+
+    public LoginStateResponseDto getLoginState(Long memberId) {
+        if (memberId == null) {
+            return new LoginStateResponseDto(false);
+        } else {
+            return new LoginStateResponseDto(true);
+        }
+    }
 }

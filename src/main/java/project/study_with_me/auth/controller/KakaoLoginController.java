@@ -4,13 +4,11 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import project.study_with_me.auth.dto.KakaoLoginReissueDto;
 import project.study_with_me.auth.dto.KakaoLoginRequestDto;
 import project.study_with_me.auth.dto.KakaoLoginResponseDto;
+import project.study_with_me.auth.dto.LoginStateResponseDto;
 import project.study_with_me.auth.jwt.utils.SecurityUtil;
 import project.study_with_me.auth.service.KakaoLoginService;
 
@@ -38,5 +36,11 @@ public class KakaoLoginController {
     @PostMapping("/kakao/reissue")
     public ResponseEntity<KakaoLoginResponseDto> reissue(@RequestBody KakaoLoginReissueDto kakaoLoginReissueDto) {
         return ResponseEntity.ok(kakaoLoginService.reissue(kakaoLoginReissueDto));
+    }
+
+    @Operation(summary = "로그인 확인")
+    @GetMapping("/login/state")
+    public ResponseEntity<LoginStateResponseDto> getLoginState() {
+        return ResponseEntity.ok(kakaoLoginService.getLoginState(SecurityUtil.getCurrentMemberId()));
     }
 }
