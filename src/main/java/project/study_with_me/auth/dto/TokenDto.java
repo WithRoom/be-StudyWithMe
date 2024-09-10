@@ -3,6 +3,7 @@ package project.study_with_me.auth.dto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import project.study_with_me.auth.dto.response.KakaoLoginResponseDto;
 
 @Getter
 @AllArgsConstructor

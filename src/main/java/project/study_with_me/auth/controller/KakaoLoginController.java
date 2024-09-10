@@ -5,10 +5,10 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import project.study_with_me.auth.dto.KakaoLoginReissueDto;
-import project.study_with_me.auth.dto.KakaoLoginRequestDto;
-import project.study_with_me.auth.dto.KakaoLoginResponseDto;
-import project.study_with_me.auth.dto.LoginStateResponseDto;
+import project.study_with_me.auth.dto.request.KakaoLoginReissueDto;
+import project.study_with_me.auth.dto.request.KakaoLoginRequestDto;
+import project.study_with_me.auth.dto.response.KakaoLoginResponseDto;
+import project.study_with_me.auth.dto.response.LoginStateResponseDto;
 import project.study_with_me.auth.jwt.utils.SecurityUtil;
 import project.study_with_me.auth.service.KakaoLoginService;
 

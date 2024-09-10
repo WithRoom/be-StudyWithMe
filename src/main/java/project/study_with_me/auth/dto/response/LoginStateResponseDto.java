@@ -1,4 +1,4 @@
-package project.study_with_me.auth.dto;
+package project.study_with_me.auth.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

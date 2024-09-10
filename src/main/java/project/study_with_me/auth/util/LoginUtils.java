@@ -7,7 +7,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import project.study_with_me.auth.dto.KakaoLoginResponseDto;
+import project.study_with_me.auth.dto.response.KakaoLoginResponseDto;
 import project.study_with_me.auth.dto.TokenDto;
 import project.study_with_me.auth.entity.RefreshToken;
 import project.study_with_me.auth.jwt.JwtProvider;

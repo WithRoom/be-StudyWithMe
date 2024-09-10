@@ -19,6 +19,7 @@ public class SecurityUtil {
             throw new RuntimeException("Security Context 에 인증 정보가 없습니다.");
         }
 
+        // SecurityContext 에 authentication 이 없으면 anonymousUser 가 자동 등록됨
         if (authentication.getName().equals("anonymousUser")) {
             return null;
         }

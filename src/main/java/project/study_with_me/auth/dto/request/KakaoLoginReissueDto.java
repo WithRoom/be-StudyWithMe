@@ -1,6 +1,7 @@
-package project.study_with_me.auth.dto;
+package project.study_with_me.auth.dto.request;
 
 import lombok.Getter;
+import project.study_with_me.auth.dto.response.KakaoLoginResponseDto;
 
 @Getter
 public class KakaoLoginReissueDto {
