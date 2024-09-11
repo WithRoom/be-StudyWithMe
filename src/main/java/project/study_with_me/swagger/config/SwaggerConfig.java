@@ -38,4 +38,12 @@ public class SwaggerConfig {
                 .packagesToScan("project.study_with_me.s3")
                 .build();
     }
+
+    @Bean
+    public GroupedOpenApi homeApi() {
+        return GroupedOpenApi.builder()
+                .group("home")
+                .packagesToScan("project.study_with_me.home")
+                .build();
+    }
 }
