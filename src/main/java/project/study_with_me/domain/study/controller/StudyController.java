@@ -6,10 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import project.study_with_me.auth.jwt.utils.SecurityUtil;
-import project.study_with_me.domain.study.dto.request.CreateStudyRequestDto;
-import project.study_with_me.domain.study.dto.request.StudyInterestRequestDto;
-import project.study_with_me.domain.study.dto.request.StudyJoinRequestDto;
-import project.study_with_me.domain.study.dto.request.ResponseJoinStudyRequestDto;
+import project.study_with_me.domain.study.dto.request.*;
 import project.study_with_me.domain.study.dto.response.*;
 import project.study_with_me.domain.study.service.StudyService;
 
@@ -73,5 +70,11 @@ public class StudyController {
     @GetMapping("/mypage/info/interest")
     public ResponseEntity<InterestStudies> studyInfoInterestStudy() {
         return ResponseEntity.ok(studyService.studyInfoInterestStudy(SecurityUtil.getCurrentMemberId()));
+    }
+
+    @Operation(summary = "스터디 상세 조회")
+    @GetMapping("/info/detail")
+    public ResponseEntity<StudyDetailInfoResponseDto> studyDetailInfo(@RequestBody StudyDetailRequestDto studyDetailRequestDto) {
+        return ResponseEntity.ok(studyService.studyDetailInfo(studyDetailRequestDto));
     }
 }

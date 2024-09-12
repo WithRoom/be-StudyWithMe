@@ -4,11 +4,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
-import project.study_with_me.domain.study.dto.request.CreateStudyRequestDto;
-import project.study_with_me.domain.study.dto.request.StudyInterestRequestDto;
-import project.study_with_me.domain.study.dto.request.StudyJoinRequestDto;
-import project.study_with_me.domain.study.dto.request.ResponseJoinStudyRequestDto;
+import project.study_with_me.domain.member.entity.Member;
+import project.study_with_me.domain.member.repository.MemberRepository;
+import project.study_with_me.domain.study.dto.request.*;
 import project.study_with_me.domain.study.dto.response.*;
 import project.study_with_me.domain.study.entity.*;
 import project.study_with_me.domain.study.repository.StudyInterestRepository;
@@ -28,6 +26,7 @@ public class StudyService {
     private final StudyInterestRepository studyInterestRepository;
     private final StudyJoinRepository studyJoinRepository;
     private final StudyMemberRepository studyMemberRepository;
+    private final MemberRepository memberRepository;
     private final DtoUtils dtoUtils;
 
     @Transactional
@@ -95,36 +94,37 @@ public class StudyService {
 
     @Transactional(readOnly = true)
     public GroupLeaderStudies studyInfoMyStudy(Long memberId) {
-        GroupLeaderStudies groupLeaderStudies = dtoUtils.createGroupLeaderStudies(memberId);
-
-        return groupLeaderStudies;
+        return dtoUtils.createGroupLeaderStudies(memberId);
     }
 
     @Transactional(readOnly = true)
     public ParticipationStudies studyInfoParticipationStudy(Long memberId) {
-        ParticipationStudies participationStudies = dtoUtils.createParticipationStudies(memberId);
-
-        return participationStudies;
+        return dtoUtils.createParticipationStudies(memberId);
     }
 
     @Transactional(readOnly = true)
     public SignUpStudies studyInfoSignUpStudy(Long memberId) {
-        SignUpStudies signUpStudies = dtoUtils.createSignUpStudies(memberId);
-
-        return signUpStudies;
+        return dtoUtils.createSignUpStudies(memberId);
     }
 
     @Transactional(readOnly = true)
     public ResponseSignUpStudies studyInfoRequestSignUpStudy(Long memberId) {
-        ResponseSignUpStudies responseSignUpStudies = dtoUtils.createResponseSignUpStudies(memberId);
-
-        return responseSignUpStudies;
+        return dtoUtils.createResponseSignUpStudies(memberId);
     }
 
     @Transactional(readOnly = true)
     public InterestStudies studyInfoInterestStudy(Long memberId) {
-        InterestStudies interestStudies = dtoUtils.createInterestStudies(memberId);
+        return dtoUtils.createInterestStudies(memberId);
+    }
 
-        return interestStudies;
+    @Transactional(readOnly = true)
+    public StudyDetailInfoResponseDto studyDetailInfo(StudyDetailRequestDto studyDetailRequestDto) {
+        Study study = studyRepository.findById(studyDetailRequestDto.getStudyId())
+                .orElseThrow(() -> new RuntimeException("해당 스터디가 없습니다."));
+
+        Member member = memberRepository.findById(study.getGroupLeader())
+                .orElseThrow(() -> new RuntimeException("해당 회원이 없습니다."));
+
+        return new StudyDetailInfoResponseDto(study, member);
     }
 }
