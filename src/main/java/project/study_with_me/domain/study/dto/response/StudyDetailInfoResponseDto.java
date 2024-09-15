@@ -28,6 +28,7 @@ public class StudyDetailInfoResponseDto {
 
     public StudyDetail createStudyDetail(Study study) {
         return StudyDetail.builder()
+                .recruitPeople(study.getRecruitPeople())
                 .studyId(study.getStudyId())
                 .tag(study.getTag())
                 .studyImageUrl(study.getStudyImageUrl())

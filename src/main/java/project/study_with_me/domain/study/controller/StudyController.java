@@ -73,7 +73,7 @@ public class StudyController {
     }
 
     @Operation(summary = "스터디 상세 조회")
-    @GetMapping("/info/detail")
+    @PostMapping("/info/detail")
     public ResponseEntity<StudyDetailInfoResponseDto> studyDetailInfo(@RequestBody StudyDetailRequestDto studyDetailRequestDto) {
         return ResponseEntity.ok(studyService.studyDetailInfo(studyDetailRequestDto));
     }

@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class HomeStudyInfo {
 
+    private Long studyId;
     private Boolean state;
     private String type;
     private String studyImageUrl;
@@ -18,4 +19,5 @@ public class HomeStudyInfo {
     private String topic;
     private String difficulty;
     private Integer nowPeople;
+    private Boolean interest;
 }

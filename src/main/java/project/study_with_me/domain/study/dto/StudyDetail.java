@@ -19,4 +19,5 @@ public class StudyDetail {
     private String tag;
     private Boolean state;
     private String introduction;
+    private Integer recruitPeople;
 }

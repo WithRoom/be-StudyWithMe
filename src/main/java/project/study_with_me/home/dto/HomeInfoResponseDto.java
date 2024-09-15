@@ -17,8 +17,9 @@ public class HomeInfoResponseDto {
     private MemberInfo memberInfo;
     private List<StudyMemberInfo> studyMemberInfoList;
 
-    public HomeStudyInfo createHomeStudyInfo(Study study) {
+    public HomeStudyInfo createHomeStudyInfo(Study study, Boolean interest) {
         return HomeStudyInfo.builder()
+                .studyId(study.getStudyId())
                 .state(study.getSchedule().getState())
                 .topic(study.getTopic())
                 .title(study.getTitle())
@@ -26,6 +27,7 @@ public class HomeInfoResponseDto {
                 .studyImageUrl(study.getStudyImageUrl())
                 .difficulty(study.getDifficulty())
                 .nowPeople(study.getNowPeople())
+                .interest(interest)
                 .build();
     }
 

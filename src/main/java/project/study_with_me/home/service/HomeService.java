@@ -2,11 +2,14 @@ package project.study_with_me.home.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 import project.study_with_me.domain.member.entity.Member;
 import project.study_with_me.domain.member.repository.MemberRepository;
 import project.study_with_me.domain.study.entity.Study;
+import project.study_with_me.domain.study.entity.StudyInterest;
 import project.study_with_me.domain.study.entity.StudyMember;
+import project.study_with_me.domain.study.repository.StudyInterestRepository;
 import project.study_with_me.domain.study.repository.StudyMemberRepository;
 import project.study_with_me.domain.study.repository.StudyRepository;
 import project.study_with_me.home.dto.HomeInfoResponseDto;
@@ -26,6 +29,7 @@ public class HomeService {
     private final StudyRepository studyRepository;
     private final MemberRepository memberRepository;
     private final StudyMemberRepository studyMemberRepository;
+    private final StudyInterestRepository studyInterestRepository;
 
 
     public HomeInfoResponseDto getHomeInfo(Long memberId) {
@@ -36,7 +40,17 @@ public class HomeService {
         // 스터디 조회
         List<Study> studies = studyRepository.findAllByOrderByStartDayDesc();
         for (Study study : studies) {
-            homeStudyInfoList.add(homeInfoResponseDto.createHomeStudyInfo(study));
+            // 관심 스터디 조회
+            StudyInterest studyInterest = studyInterestRepository.findByMemberIdAndStudyId(memberId, study.getStudyId())
+                    .orElse(null);
+
+            Boolean interest = false;
+
+            if (studyInterest != null) {    // 관심 스터디인 경우
+                interest = true;
+            }
+
+            homeStudyInfoList.add(homeInfoResponseDto.createHomeStudyInfo(study, interest));
         }
 
         homeInfoResponseDto.setHomeStudyInfoList(homeStudyInfoList);

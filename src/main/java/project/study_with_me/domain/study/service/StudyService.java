@@ -57,10 +57,14 @@ public class StudyService {
         Study study = studyRepository.findById(studyJoinRequestDto.getStudyId())
                 .orElseThrow(() -> new RuntimeException("해당 스터디가 없습니다."));
 
-        StudyJoin studyJoin = studyJoinRequestDto.createStudyJoin(memberId, study.getGroupLeader());
-        studyJoinRepository.save(studyJoin);
+        if (study.getGroupLeader() == memberId) {
+            return GROUP_LEADER.getText();
+        } else {
+            StudyJoin studyJoin = studyJoinRequestDto.createStudyJoin(memberId, study.getGroupLeader());
+            studyJoinRepository.save(studyJoin);
 
-        return SUCCESS_JOIN_STUDY.getText();
+            return SUCCESS_JOIN_STUDY.getText();
+        }
     }
 
     @Transactional
