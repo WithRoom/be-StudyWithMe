@@ -21,6 +21,7 @@ public class HomeInfoResponseDto {
         return HomeStudyInfo.builder()
                 .studyId(study.getStudyId())
                 .state(study.getSchedule().getState())
+                .recruitPeople(study.getRecruitPeople())
                 .topic(study.getTopic())
                 .title(study.getTitle())
                 .type(study.getType())

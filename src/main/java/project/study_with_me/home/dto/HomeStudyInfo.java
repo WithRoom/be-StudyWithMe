@@ -20,4 +20,5 @@ public class HomeStudyInfo {
     private String difficulty;
     private Integer nowPeople;
     private Boolean interest;
+    private Integer recruitPeople;
 }
