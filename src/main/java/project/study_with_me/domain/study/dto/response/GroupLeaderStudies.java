@@ -16,7 +16,7 @@ public class GroupLeaderStudies {
 
     private List<GroupLeaderStudy> groupLeaderStudies;
 
-    public GroupLeaderStudy createGroupLeaderStudy(Study study) {
+    public GroupLeaderStudy createGroupLeaderStudy(Study study, Boolean interest) {
         return GroupLeaderStudy.builder()
                 .studyId(study.getStudyId())
                 .studyImageUrl(study.getStudyImageUrl())
@@ -27,6 +27,7 @@ public class GroupLeaderStudies {
                 .nowPeople(study.getNowPeople())
                 .difficulty(study.getDifficulty())
                 .recruitPeople(study.getRecruitPeople())
+                .interest(interest)
                 .build();
     }
 }

@@ -15,7 +15,7 @@ public class InterestStudies {
 
     private List<InterestStudy> interestStudies;
 
-    public InterestStudy createInterestStudy(Study study) {
+    public InterestStudy createInterestStudy(Study study, Boolean interest) {
         return InterestStudy.builder()
                 .studyId(study.getStudyId())
                 .studyImageUrl(study.getStudyImageUrl())
@@ -26,6 +26,7 @@ public class InterestStudies {
                 .topic(study.getTopic())
                 .difficulty(study.getDifficulty())
                 .recruitPeople(study.getRecruitPeople())
+                .interest(interest)
                 .build();
     }
 }

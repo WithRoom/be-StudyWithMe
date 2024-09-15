@@ -16,7 +16,7 @@ public class SignUpStudies {
 
     private List<SignUpStudy> signUpStudies;
 
-    public SignUpStudy createSignUpStudy(Study study) {
+    public SignUpStudy createSignUpStudy(Study study, Boolean interest) {
         return SignUpStudy.builder()
                 .studyId(study.getStudyId())
                 .studyImageUrl(study.getStudyImageUrl())
@@ -27,6 +27,7 @@ public class SignUpStudies {
                 .topic(study.getTopic())
                 .difficulty(study.getDifficulty())
                 .recruitPeople(study.getRecruitPeople())
+                .interest(interest)
                 .build();
     }
 }

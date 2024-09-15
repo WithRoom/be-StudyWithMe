@@ -15,7 +15,7 @@ public class ParticipationStudies {
 
     private List<ParticipationStudy> participationStudies;
 
-    public ParticipationStudy createParticipationStudy(Study study) {
+    public ParticipationStudy createParticipationStudy(Study study, Boolean interest) {
         return ParticipationStudy.builder()
                 .studyId(study.getStudyId())
                 .studyImageUrl(study.getStudyImageUrl())
@@ -26,6 +26,7 @@ public class ParticipationStudies {
                 .topic(study.getTopic())
                 .difficulty(study.getDifficulty())
                 .recruitPeople(study.getRecruitPeople())
+                .interest(interest)
                 .build();
     }
 }

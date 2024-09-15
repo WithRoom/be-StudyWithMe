@@ -15,7 +15,7 @@ public class ResponseSignUpStudies {
 
     private List<ResponseSignUpStudy> responseSignUpStudies;
 
-    public ResponseSignUpStudy createResponseSignUpStudy(Study study) {
+    public ResponseSignUpStudy createResponseSignUpStudy(Study study, Boolean interest) {
         return ResponseSignUpStudy.builder()
                 .studyId(study.getStudyId())
                 .studyImageUrl(study.getStudyImageUrl())
@@ -26,6 +26,7 @@ public class ResponseSignUpStudies {
                 .topic(study.getTopic())
                 .difficulty(study.getDifficulty())
                 .recruitPeople(study.getRecruitPeople())
+                .interest(interest)
                 .build();
     }
 }

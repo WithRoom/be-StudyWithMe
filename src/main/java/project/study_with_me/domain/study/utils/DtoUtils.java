@@ -33,7 +33,15 @@ public class DtoUtils {
         GroupLeaderStudies groupLeaderStudies = new GroupLeaderStudies(new ArrayList<>());
 
         for (Study findGroupLeaderStudy : findGroupLeaders) {
-            GroupLeaderStudy groupLeaderStudy = new GroupLeaderStudies().createGroupLeaderStudy(findGroupLeaderStudy);
+            StudyInterest studyInterest = studyInterestRepository.findByMemberIdAndStudyId(memberId, findGroupLeaderStudy.getStudyId())
+                    .orElse(null);
+
+            Boolean interest = false;
+
+            if (studyInterest != null) {
+                interest = true;
+            }
+            GroupLeaderStudy groupLeaderStudy = new GroupLeaderStudies().createGroupLeaderStudy(findGroupLeaderStudy, interest);
             groupLeaderStudies.getGroupLeaderStudies().add(groupLeaderStudy);
         }
 
@@ -49,7 +57,16 @@ public class DtoUtils {
             Study study = studyRepository.findById(studyMember.getStudyId())
                     .orElseThrow(() -> new RuntimeException(NO_SEARCH_STUDY.getText()));
 
-            ParticipationStudy participationStudy = new ParticipationStudies().createParticipationStudy(study);
+            StudyInterest studyInterest = studyInterestRepository.findByMemberIdAndStudyId(memberId, study.getStudyId())
+                    .orElse(null);
+
+            Boolean interest = false;
+
+            if (studyInterest != null) {
+                interest = true;
+            }
+
+            ParticipationStudy participationStudy = new ParticipationStudies().createParticipationStudy(study, interest);
             participationStudies.getParticipationStudies().add(participationStudy);
         }
 
@@ -66,7 +83,16 @@ public class DtoUtils {
             Study study = studyRepository.findById(studyJoin.getStudyId())
                     .orElseThrow(() -> new RuntimeException(NO_SEARCH_STUDY.getText()));
 
-            SignUpStudy signUpStudy = new SignUpStudies().createSignUpStudy(study);
+            StudyInterest studyInterest = studyInterestRepository.findByMemberIdAndStudyId(memberId, study.getStudyId())
+                    .orElse(null);
+
+            Boolean interest = false;
+
+            if (studyInterest != null) {
+                interest = true;
+            }
+
+            SignUpStudy signUpStudy = new SignUpStudies().createSignUpStudy(study, interest);
             signUpStudies.getSignUpStudies().add(signUpStudy);
         }
 
@@ -82,7 +108,16 @@ public class DtoUtils {
             Study study = studyRepository.findById(studyJoin.getStudyId())
                     .orElseThrow(() -> new RuntimeException(NO_SEARCH_STUDY.getText()));
 
-            ResponseSignUpStudy responseSignUpStudy = new ResponseSignUpStudies().createResponseSignUpStudy(study);
+            StudyInterest studyInterest = studyInterestRepository.findByMemberIdAndStudyId(memberId, study.getStudyId())
+                    .orElse(null);
+
+            Boolean interest = false;
+
+            if (studyInterest != null) {
+                interest = true;
+            }
+
+            ResponseSignUpStudy responseSignUpStudy = new ResponseSignUpStudies().createResponseSignUpStudy(study, interest);
             responseSignUpStudies.getResponseSignUpStudies().add(responseSignUpStudy);
         }
 
@@ -99,7 +134,7 @@ public class DtoUtils {
             Study study = studyRepository.findById(studyInterest.getStudyId())
                     .orElseThrow(() -> new RuntimeException("해당 스터디가 없습니다."));
 
-            InterestStudy interestStudy = new InterestStudies().createInterestStudy(study);
+            InterestStudy interestStudy = new InterestStudies().createInterestStudy(study, true);
             interestStudies.getInterestStudies().add(interestStudy);
         }
 
