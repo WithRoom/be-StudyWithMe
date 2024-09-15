@@ -45,8 +45,13 @@ public class StudyService {
     @Transactional
     public String interestStudy(StudyInterestRequestDto studyInterestRequestDto, Long memberId) {
 
-        StudyInterest studyInterest = studyInterestRequestDto.createStudyInterest(memberId);
-        studyInterestRepository.save(studyInterest);
+        StudyInterest studyInterest = studyInterestRepository.findByMemberIdAndStudyId(memberId, studyInterestRequestDto.getStudyId())
+                .orElse(null);
+
+        if (studyInterest == null) {
+            StudyInterest interest = studyInterestRequestDto.createStudyInterest(memberId);
+            studyInterestRepository.save(interest);
+        }
 
         return SUCCESS_INTEREST_STUDY.getText();
     }
