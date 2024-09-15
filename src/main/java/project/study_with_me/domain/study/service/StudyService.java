@@ -57,7 +57,7 @@ public class StudyService {
         Study study = studyRepository.findById(studyJoinRequestDto.getStudyId())
                 .orElseThrow(() -> new RuntimeException("해당 스터디가 없습니다."));
 
-        if (study.getGroupLeader() == memberId) {
+        if (study.getGroupLeader().equals(memberId)) {
             return GROUP_LEADER.getText();
         } else {
             StudyJoin studyJoin = studyJoinRequestDto.createStudyJoin(memberId, study.getGroupLeader());
