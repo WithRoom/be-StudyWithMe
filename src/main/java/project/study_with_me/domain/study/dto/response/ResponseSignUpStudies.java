@@ -15,8 +15,9 @@ public class ResponseSignUpStudies {
 
     private List<ResponseSignUpStudy> responseSignUpStudies;
 
-    public ResponseSignUpStudy createResponseSignUpStudy(Study study, Boolean interest) {
+    public ResponseSignUpStudy createResponseSignUpStudy(Study study, Boolean interest, Long memberId) {
         return ResponseSignUpStudy.builder()
+                .memberId(memberId)
                 .studyId(study.getStudyId())
                 .studyImageUrl(study.getStudyImageUrl())
                 .state(study.getSchedule().getState())

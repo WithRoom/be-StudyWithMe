@@ -21,4 +21,5 @@ public class ResponseSignUpStudy {
     private Integer recruitPeople;   // 참여인원
     private Integer nowPeople;  // 현재인원
     private Boolean interest;
+    private Long memberId;
 }

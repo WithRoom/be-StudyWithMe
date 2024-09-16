@@ -117,7 +117,7 @@ public class DtoUtils {
                 interest = true;
             }
 
-            ResponseSignUpStudy responseSignUpStudy = new ResponseSignUpStudies().createResponseSignUpStudy(study, interest);
+            ResponseSignUpStudy responseSignUpStudy = new ResponseSignUpStudies().createResponseSignUpStudy(study, interest, studyJoin.getJoinMemberId());
             responseSignUpStudies.getResponseSignUpStudies().add(responseSignUpStudy);
         }
 
