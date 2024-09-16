@@ -4,9 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import project.study_with_me.domain.comment.dto.CommentInfoRequestDto;
 import project.study_with_me.domain.comment.dto.CommentRequestDto;
-import project.study_with_me.domain.comment.dto.CommentResponseDto;
 import project.study_with_me.domain.comment.entity.Comment;
 import project.study_with_me.domain.comment.repository.CommentRepository;
 

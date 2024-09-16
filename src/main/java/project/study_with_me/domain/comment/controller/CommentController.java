@@ -8,9 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import project.study_with_me.domain.comment.dto.CommentInfoRequestDto;
 import project.study_with_me.domain.comment.dto.CommentRequestDto;
-import project.study_with_me.domain.comment.dto.CommentResponseDto;
 import project.study_with_me.domain.comment.service.CommentService;
 
 @Tag(name = "Comment", description = "댓글 생성 및 조회")
@@ -27,9 +25,4 @@ public class CommentController {
         return ResponseEntity.ok(commentService.createComment(requestDto));
     }
 
-/*    @Operation(summary = "댓글 조회")
-    @PostMapping("/info")
-    public ResponseEntity<CommentResponseDto> commentInfo(@RequestBody CommentInfoRequestDto requestDto) {
-        return ResponseEntity.ok(commentService.commentInfo(requestDto));
-    }*/
 }
