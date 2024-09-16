@@ -4,11 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import project.study_with_me.domain.comment.entity.Comment;
 import project.study_with_me.domain.member.entity.Member;
+import project.study_with_me.domain.study.dto.StudyComment;
 import project.study_with_me.domain.study.dto.StudyDetail;
 import project.study_with_me.domain.study.dto.StudyGroupLeader;
 import project.study_with_me.domain.study.dto.StudyScheduleDetail;
 import project.study_with_me.domain.study.entity.Study;
+
+import java.util.List;
 
 @Getter
 @AllArgsConstructor
@@ -19,6 +23,7 @@ public class StudyDetailInfoResponseDto {
     private StudyDetail studyDetail;
     private StudyGroupLeader studyGroupLeader;
     private StudyScheduleDetail studyScheduleDetail;
+    private List<StudyComment> studyCommentList;
 
     public StudyDetailInfoResponseDto(Study study, Member member) {
         this.studyDetail = createStudyDetail(study);
@@ -57,5 +62,17 @@ public class StudyDetailInfoResponseDto {
                 .nowPeople(study.getNowPeople())
                 .state(study.getSchedule().getState())
                 .build();
+    }
+
+    public StudyComment createStudyComment(Comment comment, Member member) {
+        return StudyComment.builder()
+                .nickName(member.getNickName())
+                .content(comment.getContent())
+                .profileImage(member.getProfileImage())
+                .build();
+    }
+
+    public void setStudyCommentList(List<StudyComment> studyCommentList) {
+        this.studyCommentList = studyCommentList;
     }
 }

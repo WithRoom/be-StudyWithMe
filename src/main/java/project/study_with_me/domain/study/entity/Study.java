@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import project.study_with_me.domain.comment.entity.Comment;
 
 import javax.persistence.*;
 

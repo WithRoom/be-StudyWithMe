@@ -4,8 +4,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import project.study_with_me.domain.comment.entity.Comment;
+import project.study_with_me.domain.comment.repository.CommentRepository;
 import project.study_with_me.domain.member.entity.Member;
 import project.study_with_me.domain.member.repository.MemberRepository;
+import project.study_with_me.domain.study.dto.StudyComment;
 import project.study_with_me.domain.study.dto.request.*;
 import project.study_with_me.domain.study.dto.response.*;
 import project.study_with_me.domain.study.entity.*;
@@ -14,6 +17,9 @@ import project.study_with_me.domain.study.repository.StudyJoinRepository;
 import project.study_with_me.domain.study.repository.StudyMemberRepository;
 import project.study_with_me.domain.study.repository.StudyRepository;
 import project.study_with_me.domain.study.utils.DtoUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static project.study_with_me.text.StudyTexts.*;
 
@@ -28,6 +34,7 @@ public class StudyService {
     private final StudyMemberRepository studyMemberRepository;
     private final MemberRepository memberRepository;
     private final DtoUtils dtoUtils;
+    private final CommentRepository commentRepository;
 
     @Transactional
     public String createStudy(CreateStudyRequestDto createStudyRequestDto, Long memberId) {
@@ -134,6 +141,21 @@ public class StudyService {
         Member member = memberRepository.findById(study.getGroupLeader())
                 .orElseThrow(() -> new RuntimeException("해당 회원이 없습니다."));
 
-        return new StudyDetailInfoResponseDto(study, member);
+        StudyDetailInfoResponseDto studyDetailInfoResponseDto = new StudyDetailInfoResponseDto(study, member);
+
+        List<StudyComment> studyCommentList = new ArrayList<>();
+
+        List<Comment> commentList = commentRepository.findByStudyId(study.getStudyId());
+        for (Comment comment : commentList) {
+            Member findMember = memberRepository.findById(comment.getMemberId())
+                    .orElseThrow(() -> new RuntimeException("해당 회원이 없습니다."));
+
+            StudyComment studyComment = studyDetailInfoResponseDto.createStudyComment(comment, findMember);
+            studyCommentList.add(studyComment);
+        }
+
+        studyDetailInfoResponseDto.setStudyCommentList(studyCommentList);
+
+        return studyDetailInfoResponseDto;
     }
 }

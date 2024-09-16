@@ -46,4 +46,12 @@ public class SwaggerConfig {
                 .packagesToScan("project.study_with_me.home")
                 .build();
     }
+
+    @Bean
+    public GroupedOpenApi commentApi() {
+        return GroupedOpenApi.builder()
+                .group("comment")
+                .packagesToScan("project.study_with_me.domain.comment")
+                .build();
+    }
 }
