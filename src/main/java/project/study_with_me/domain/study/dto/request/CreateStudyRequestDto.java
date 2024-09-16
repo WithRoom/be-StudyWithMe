@@ -25,6 +25,7 @@ public class CreateStudyRequestDto {
                 .nowPeople(1)
                 .introduction(studyInfo.getIntroduction())
                 .recruitPeople(studyInfo.getRecruitPeople())
+                .difficulty(studyInfo.getDifficulty())
                 .build();
     }
 
