@@ -30,9 +30,6 @@ public class StudyController {
         return ResponseEntity.ok(studyService.interestStudy(studyInterestRequestDto, SecurityUtil.getCurrentMemberId()));
     }
 
-    /** NOTE
-     *  반복 신청 제재 로직 구현해야 함
-     */
     @Operation(summary = "스터디 참여 신청")
     @PostMapping("/join")
     public ResponseEntity<Boolean> joinStudy(@RequestBody StudyJoinRequestDto studyJoinRequestDto) {

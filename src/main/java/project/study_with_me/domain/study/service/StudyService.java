@@ -7,7 +7,6 @@ import org.springframework.transaction.annotation.Transactional;
 import project.study_with_me.domain.comment.entity.Comment;
 import project.study_with_me.domain.comment.repository.CommentRepository;
 import project.study_with_me.domain.member.entity.Member;
-import project.study_with_me.domain.member.repository.MemberRepository;
 import project.study_with_me.domain.member.utils.MemberUtils;
 import project.study_with_me.domain.study.dto.StudyComment;
 import project.study_with_me.domain.study.dto.request.*;
@@ -32,7 +31,6 @@ public class StudyService {
     private final StudyInterestRepository studyInterestRepository;
     private final StudyJoinRepository studyJoinRepository;
     private final StudyMemberRepository studyMemberRepository;
-    private final MemberRepository memberRepository;
     private final DtoUtils dtoUtils;
     private final CommentRepository commentRepository;
     private final StudyUtils studyUtils;
@@ -65,15 +63,20 @@ public class StudyService {
         return true;
     }
 
-    /** NOTE
-     * 반복 신청 제재해야 함
-     */
     @Transactional
     public Boolean joinStudy(StudyJoinRequestDto studyJoinRequestDto, Long memberId) {
         Study study = studyUtils.findStudy(studyJoinRequestDto.getStudyId());
 
-        if (study.getGroupLeader().equals(memberId)) {
+        if (study.getGroupLeader().equals(memberId)) {  // 그룹장인 경우
+            return false;
+        }
 
+        StudyJoin findStudyJoin = studyJoinRepository.findByStudyIdAndJoinMemberId(study.getStudyId(), memberId)
+                .orElse(null);
+        StudyMember studyMember = studyMemberRepository.findByMemberIdAndStudyId(memberId, study.getStudyId())
+                .orElse(null);
+
+        if (findStudyJoin != null || studyMember != null) { // 이미 신청한 스터디, 참여 중인 스터디인 경우
             return false;
         } else {
             StudyJoin studyJoin = studyJoinRequestDto.createStudyJoin(memberId, study.getGroupLeader());
