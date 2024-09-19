@@ -4,9 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import project.study_with_me.domain.member.dto.CreateMemberInfoRequestDto;
-import project.study_with_me.domain.member.dto.MemberInfoRequestDto;
-import project.study_with_me.domain.member.dto.MemberInfoResponseDto;
+import project.study_with_me.domain.member.dto.request.CreateMemberInfoRequestDto;
+import project.study_with_me.domain.member.dto.request.MemberInfoRequestDto;
+import project.study_with_me.domain.member.dto.response.MemberInfoResponseDto;
 
 import javax.persistence.*;
 

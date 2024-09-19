@@ -15,7 +15,6 @@ import project.study_with_me.auth.dto.request.KakaoLoginReissueDto;
 import project.study_with_me.auth.dto.response.KakaoLoginResponseDto;
 import project.study_with_me.auth.dto.response.KakaoTokenResponseDto;
 import project.study_with_me.auth.dto.response.KakaoUserResponseDto;
-import project.study_with_me.auth.dto.response.LoginStateResponseDto;
 import project.study_with_me.auth.entity.RefreshToken;
 import project.study_with_me.auth.jwt.JwtProvider;
 import project.study_with_me.auth.repository.RefreshTokenRepository;
@@ -60,7 +59,7 @@ public class KakaoLoginService {
      * Kakao OAuth Logout
      */
     @Transactional
-    public String kakaoOAuthLogout(Long memberId) {
+    public Boolean kakaoOAuthLogout(Long memberId) {
 
         RefreshToken refreshToken = refreshTokenRepository.findById(memberId)
                 .orElseThrow(() -> new RuntimeException(NO_REFRESHTOKEN.getText()));
@@ -69,7 +68,7 @@ public class KakaoLoginService {
 
         SecurityContextHolder.clearContext();   // 사용자 정보 삭제
 
-        return LOGOUT.getText();
+        return true;
     }
 
     /**
@@ -134,11 +133,11 @@ public class KakaoLoginService {
                 });
     }
 
-    public LoginStateResponseDto getLoginState(Long memberId) {
+    public Boolean getLoginState(Long memberId) {
         if (memberId == null) {
-            return new LoginStateResponseDto(false);
+            return false;
         } else {
-            return new LoginStateResponseDto(true);
+            return true;
         }
     }
 }

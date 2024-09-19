@@ -11,6 +11,8 @@ import lombok.NoArgsConstructor;
 @Builder
 public class StudyComment {
 
+    private Long memberId;
+    private Long commentId;
     private String nickName;
     private String profileImage;
     private String content;

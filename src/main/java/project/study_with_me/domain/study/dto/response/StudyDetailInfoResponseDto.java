@@ -66,9 +66,11 @@ public class StudyDetailInfoResponseDto {
 
     public StudyComment createStudyComment(Comment comment, Member member) {
         return StudyComment.builder()
+                .memberId(member.getMemberId())
                 .nickName(member.getNickName())
                 .content(comment.getContent())
                 .profileImage(member.getProfileImage())
+                .commentId(comment.getCommentId())
                 .build();
     }
 

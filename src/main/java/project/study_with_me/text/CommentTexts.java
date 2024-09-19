@@ -4,7 +4,8 @@ import lombok.Getter;
 
 @Getter
 public enum CommentTexts {
-    COMMENT_CREATE("comment Create Success");
+
+    NO_SEARCH_COMMENT("해당 댓글이 없습니다.");
 
     private String text;
 

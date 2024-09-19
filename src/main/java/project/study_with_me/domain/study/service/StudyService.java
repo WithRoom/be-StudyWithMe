@@ -8,6 +8,7 @@ import project.study_with_me.domain.comment.entity.Comment;
 import project.study_with_me.domain.comment.repository.CommentRepository;
 import project.study_with_me.domain.member.entity.Member;
 import project.study_with_me.domain.member.repository.MemberRepository;
+import project.study_with_me.domain.member.utils.MemberUtils;
 import project.study_with_me.domain.study.dto.StudyComment;
 import project.study_with_me.domain.study.dto.request.*;
 import project.study_with_me.domain.study.dto.response.*;
@@ -17,11 +18,10 @@ import project.study_with_me.domain.study.repository.StudyJoinRepository;
 import project.study_with_me.domain.study.repository.StudyMemberRepository;
 import project.study_with_me.domain.study.repository.StudyRepository;
 import project.study_with_me.domain.study.utils.DtoUtils;
+import project.study_with_me.domain.study.utils.StudyUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static project.study_with_me.text.StudyTexts.*;
 
 @Service
 @Slf4j
@@ -35,77 +35,69 @@ public class StudyService {
     private final MemberRepository memberRepository;
     private final DtoUtils dtoUtils;
     private final CommentRepository commentRepository;
+    private final StudyUtils studyUtils;
+    private final MemberUtils memberUtils;
 
     @Transactional
-    public String createStudy(CreateStudyRequestDto createStudyRequestDto, Long memberId) {
-
+    public Boolean createStudy(CreateStudyRequestDto createStudyRequestDto, Long memberId) {
         Study study = createStudyRequestDto.createStudy(memberId);
         studyRepository.save(study);
 
         Schedule schedule = createStudyRequestDto.createSchedule(study.getStudyId());
-
         study.setSchedule(schedule);    // 한쪽만 설정해도 됨
 
-        return SUCCESS_CREATE_STUDY.getText();
+        return true;
     }
 
     @Transactional
-    public String interestStudy(StudyInterestRequestDto studyInterestRequestDto, Long memberId) {
-
-        StudyInterest studyInterest = studyInterestRepository.findByMemberIdAndStudyId(memberId, studyInterestRequestDto.getStudyId())
+    public Boolean interestStudy(StudyInterestRequestDto studyInterestRequestDto, Long memberId) {
+        StudyInterest studyInterest = studyInterestRepository
+                .findByMemberIdAndStudyId(memberId, studyInterestRequestDto.getStudyId())
                 .orElse(null);
 
-        if (studyInterest == null) {
+        if (studyInterest == null) {    // 관심 스터디가 없으면 관심 등록
             StudyInterest interest = studyInterestRequestDto.createStudyInterest(memberId);
             studyInterestRepository.save(interest);
+        } else {    // 관심 스터디가 있으면 관심 해제
+            studyInterestRepository.delete(studyInterest);
         }
 
-        return SUCCESS_INTEREST_STUDY.getText();
+        return true;
     }
 
+    /** NOTE
+     * 반복 신청 제재해야 함
+     */
     @Transactional
-    public String joinStudy(StudyJoinRequestDto studyJoinRequestDto, Long memberId) {
-
-        Study study = studyRepository.findById(studyJoinRequestDto.getStudyId())
-                .orElseThrow(() -> new RuntimeException("해당 스터디가 없습니다."));
+    public Boolean joinStudy(StudyJoinRequestDto studyJoinRequestDto, Long memberId) {
+        Study study = studyUtils.findStudy(studyJoinRequestDto.getStudyId());
 
         if (study.getGroupLeader().equals(memberId)) {
-            return GROUP_LEADER.getText();
+
+            return false;
         } else {
             StudyJoin studyJoin = studyJoinRequestDto.createStudyJoin(memberId, study.getGroupLeader());
             studyJoinRepository.save(studyJoin);
 
-            return SUCCESS_JOIN_STUDY.getText();
+            return true;
         }
     }
 
     @Transactional
-    public String responseJoinStudy(ResponseJoinStudyRequestDto responseJoinStudyRequestDto) {
+    public Boolean responseJoinStudy(JoinStudyRequestDto joinStudyRequestDto) {
+        StudyJoin studyJoin = studyUtils.findStudyJoin(joinStudyRequestDto.getStudyId(), joinStudyRequestDto.getMemberId());
 
-        StudyJoin studyJoin = studyJoinRepository.findByStudyIdAndJoinMemberId(responseJoinStudyRequestDto.getStudyId(),
-                        responseJoinStudyRequestDto.getMemberId())
-                .orElseThrow(() -> new RuntimeException("해당 스터디에 참여 요청이 없습니다."));
-
-        if (responseJoinStudyRequestDto.getState().equals(true)) {
-            StudyMember studyMember = StudyMember.builder()
-                    .studyId(studyJoin.getStudyId())
-                    .memberId(studyJoin.getJoinMemberId())
-                    .build();
-
+        if (joinStudyRequestDto.getState().equals(true)) {  // 참여 수락
+            StudyMember studyMember = joinStudyRequestDto.createStudyMember();
             studyMemberRepository.save(studyMember);
 
-            /** NOTE
-             * 좀 더 다른 로직 생각해봐야 함
-             */
-            Study study = studyRepository.findById(responseJoinStudyRequestDto.getStudyId())
-                    .orElseThrow(() -> new RuntimeException("해당 스터디가 없습니다."));
-
+            Study study = studyUtils.findStudy(joinStudyRequestDto.getStudyId());
             study.updateStudyNowPeople();
         }
 
         studyJoinRepository.delete(studyJoin);
 
-        return SUCCESS_JOIN_RESPONSE_STUDY.getText();
+        return true;
     }
 
     @Transactional(readOnly = true)
@@ -135,20 +127,16 @@ public class StudyService {
 
     @Transactional(readOnly = true)
     public StudyDetailInfoResponseDto studyDetailInfo(StudyDetailRequestDto studyDetailRequestDto) {
-        Study study = studyRepository.findById(studyDetailRequestDto.getStudyId())
-                .orElseThrow(() -> new RuntimeException("해당 스터디가 없습니다."));
-
-        Member member = memberRepository.findById(study.getGroupLeader())
-                .orElseThrow(() -> new RuntimeException("해당 회원이 없습니다."));
+        Study study = studyUtils.findStudy(studyDetailRequestDto.getStudyId());
+        Member member = memberUtils.findMember(study.getGroupLeader());
 
         StudyDetailInfoResponseDto studyDetailInfoResponseDto = new StudyDetailInfoResponseDto(study, member);
 
         List<StudyComment> studyCommentList = new ArrayList<>();
-
         List<Comment> commentList = commentRepository.findByStudyId(study.getStudyId());
+
         for (Comment comment : commentList) {
-            Member findMember = memberRepository.findById(comment.getMemberId())
-                    .orElseThrow(() -> new RuntimeException("해당 회원이 없습니다."));
+            Member findMember = memberUtils.findMember(comment.getMemberId());
 
             StudyComment studyComment = studyDetailInfoResponseDto.createStudyComment(comment, findMember);
             studyCommentList.add(studyComment);

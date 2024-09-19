@@ -20,25 +20,28 @@ public class StudyController {
 
     @Operation(summary = "스터디 생성")
     @PostMapping("/create")
-    public ResponseEntity<String> createStudy(@RequestBody CreateStudyRequestDto createStudyRequestDto) {
+    public ResponseEntity<Boolean> createStudy(@RequestBody CreateStudyRequestDto createStudyRequestDto) {
         return ResponseEntity.ok(studyService.createStudy(createStudyRequestDto, SecurityUtil.getCurrentMemberId()));
     }
 
-    @Operation(summary = "관심 스터디 등록")
+    @Operation(summary = "관심 스터디 등록 및 해제")
     @PostMapping("/interest")
-    public ResponseEntity<String> interestStudy(@RequestBody StudyInterestRequestDto studyInterestRequestDto) {
+    public ResponseEntity<Boolean> interestStudy(@RequestBody StudyInterestRequestDto studyInterestRequestDto) {
         return ResponseEntity.ok(studyService.interestStudy(studyInterestRequestDto, SecurityUtil.getCurrentMemberId()));
     }
 
+    /** NOTE
+     *  반복 신청 제재 로직 구현해야 함
+     */
     @Operation(summary = "스터디 참여 신청")
     @PostMapping("/join")
-    public ResponseEntity<String> joinStudy(@RequestBody StudyJoinRequestDto studyJoinRequestDto) {
+    public ResponseEntity<Boolean> joinStudy(@RequestBody StudyJoinRequestDto studyJoinRequestDto) {
         return ResponseEntity.ok(studyService.joinStudy(studyJoinRequestDto, SecurityUtil.getCurrentMemberId()));
     }
 
     @Operation(summary = "스터디 참여 수락 및 거절")
     @PostMapping("/response-join")
-    public ResponseEntity<String> responseJoinStudy(@RequestBody ResponseJoinStudyRequestDto responseJoinStudyRequestDto) {
+    public ResponseEntity<Boolean> responseJoinStudy(@RequestBody JoinStudyRequestDto responseJoinStudyRequestDto) {
         return ResponseEntity.ok(studyService.responseJoinStudy(responseJoinStudyRequestDto));
     }
 

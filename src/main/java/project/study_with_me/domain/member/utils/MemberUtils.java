@@ -14,8 +14,7 @@ public class MemberUtils {
     private final MemberRepository memberRepository;
 
     public Member findMember(Long memberId) {
-        Member member = memberRepository.findById(memberId)
+        return memberRepository.findById(memberId)
                 .orElseThrow(() -> new RuntimeException(NO_SEARCH_MEMBER.getText()));
-        return member;
     }
 }

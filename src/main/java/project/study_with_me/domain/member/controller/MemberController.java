@@ -6,9 +6,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import project.study_with_me.auth.jwt.utils.SecurityUtil;
-import project.study_with_me.domain.member.dto.CreateMemberInfoRequestDto;
-import project.study_with_me.domain.member.dto.MemberInfoRequestDto;
-import project.study_with_me.domain.member.dto.MemberInfoResponseDto;
+import project.study_with_me.domain.member.dto.request.CreateMemberInfoRequestDto;
+import project.study_with_me.domain.member.dto.request.MemberInfoRequestDto;
+import project.study_with_me.domain.member.dto.response.MemberInfoResponseDto;
 import project.study_with_me.domain.member.service.MemberService;
 
 @Tag(name = "유저", description = "유저 정보 조회 및 수정")
@@ -27,13 +27,13 @@ public class MemberController {
 
     @Operation(summary = "유저 디테일 정보 생성")
     @PostMapping("/create/info")
-    public ResponseEntity<String> createMemberInfo(@RequestBody CreateMemberInfoRequestDto createMemberInfoRequestDto) {
+    public ResponseEntity<Boolean> createMemberInfo(@RequestBody CreateMemberInfoRequestDto createMemberInfoRequestDto) {
         return ResponseEntity.ok(memberService.createMemberInfo(createMemberInfoRequestDto, SecurityUtil.getCurrentMemberId()));
     }
 
     @Operation(summary = "유저 정보 수정")
     @PostMapping("/mypage/update")
-    public ResponseEntity<String> memberUpdate(@RequestBody MemberInfoRequestDto memberInfoRequestDto) {
+    public ResponseEntity<Boolean> memberUpdate(@RequestBody MemberInfoRequestDto memberInfoRequestDto) {
         return ResponseEntity.ok(memberService.memberUpdate(memberInfoRequestDto, SecurityUtil.getCurrentMemberId()));
     }
 }

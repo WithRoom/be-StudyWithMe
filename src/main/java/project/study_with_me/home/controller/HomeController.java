@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import project.study_with_me.auth.jwt.utils.SecurityUtil;
-import project.study_with_me.home.dto.HomeInfoResponseDto;
+import project.study_with_me.home.dto.response.HomeInfoResponseDto;
 import project.study_with_me.home.service.HomeService;
 
 @RestController

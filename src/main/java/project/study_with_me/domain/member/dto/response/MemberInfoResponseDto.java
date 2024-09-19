@@ -1,4 +1,4 @@
-package project.study_with_me.domain.member.dto;
+package project.study_with_me.domain.member.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,8 +1,11 @@
-package project.study_with_me.home.dto;
+package project.study_with_me.home.dto.response;
 
 import lombok.*;
 import project.study_with_me.domain.member.entity.Member;
 import project.study_with_me.domain.study.entity.Study;
+import project.study_with_me.home.dto.HomeStudyInfo;
+import project.study_with_me.home.dto.MemberInfo;
+import project.study_with_me.home.dto.StudyMemberInfo;
 
 import java.util.List;
 
