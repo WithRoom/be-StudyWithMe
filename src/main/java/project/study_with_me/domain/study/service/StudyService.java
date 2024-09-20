@@ -131,6 +131,7 @@ public class StudyService {
     @Transactional(readOnly = true)
     public StudyDetailInfoResponseDto studyDetailInfo(StudyDetailRequestDto studyDetailRequestDto) {
         Study study = studyUtils.findStudy(studyDetailRequestDto.getStudyId());
+        System.out.println(study.getStudyId() + "@@@@@@@@@@@@@@@");
         Member member = memberUtils.findMember(study.getGroupLeader());
 
         StudyDetailInfoResponseDto studyDetailInfoResponseDto = new StudyDetailInfoResponseDto(study, member);
