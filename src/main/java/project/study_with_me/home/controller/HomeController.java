@@ -1,6 +1,7 @@
 package project.study_with_me.home.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +11,7 @@ import project.study_with_me.auth.jwt.utils.SecurityUtil;
 import project.study_with_me.home.dto.response.HomeInfoResponseDto;
 import project.study_with_me.home.service.HomeService;
 
+@Tag(name = "홈 화면", description = "홈 화면 및 검색 필터링")
 @RestController
 @RequestMapping("/home")
 @RequiredArgsConstructor

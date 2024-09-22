@@ -17,4 +17,5 @@ public class StudyScheduleDetail {
     private String time;
     private Integer nowPeople;
     private Integer recruitPeople;
+    private String period;  // 기간
 }

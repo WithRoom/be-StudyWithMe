@@ -61,6 +61,7 @@ public class StudyDetailInfoResponseDto {
                 .startDay(study.getSchedule().getStartDay())
                 .nowPeople(study.getNowPeople())
                 .state(study.getSchedule().getState())
+                .period(study.getSchedule().getPeriod())
                 .build();
     }
 
