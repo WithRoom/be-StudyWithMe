@@ -4,11 +4,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import project.study_with_me.domain.study.entity.Study;
+import project.study_with_me.home.repository.StudyRepositoryCustom;
 
 import java.util.List;
 
 @Repository
-public interface StudyRepository extends JpaRepository<Study, Long> {
+public interface StudyRepository extends JpaRepository<Study, Long>, StudyRepositoryCustom {
 
     List<Study> findByGroupLeader(Long groupLeader);
 

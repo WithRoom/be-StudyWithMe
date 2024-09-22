@@ -8,10 +8,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import project.study_with_me.auth.jwt.utils.SecurityUtil;
 import project.study_with_me.home.dto.response.HomeInfoResponseDto;
 import project.study_with_me.home.dto.response.StudySearchFilterInfo;
 import project.study_with_me.home.service.HomeService;
+
+import static project.study_with_me.auth.jwt.utils.SecurityUtil.*;
 
 @Tag(name = "홈 화면", description = "홈 화면 및 검색 필터링")
 @RestController
@@ -24,7 +25,7 @@ public class HomeController {
     @Operation(summary = "홈 화면 조회")
     @GetMapping("/info")
     public ResponseEntity<HomeInfoResponseDto> getHomeInfo() {
-        return ResponseEntity.ok(homeService.getHomeInfo(SecurityUtil.getCurrentMemberId()));
+        return ResponseEntity.ok(homeService.getHomeInfo(getCurrentMemberId()));
     }
 
     @Operation(summary = "스터디 조회 필터링")
@@ -36,6 +37,6 @@ public class HomeController {
             @RequestParam(required = false) String type,
             @RequestParam(required = false) Boolean state
     ) {
-        return ResponseEntity.ok(homeService.searchStudies(topic, difficulty, weekDay, type, state));
+        return ResponseEntity.ok(homeService.searchStudies(topic, difficulty, weekDay, type, state, getCurrentMemberId()));
     }
 }
