@@ -2,8 +2,10 @@ package project.study_with_me.home.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import project.study_with_me.home.dto.response.HomeInfoResponseDto;
+import project.study_with_me.home.dto.response.StudySearchFilterInfo;
 import project.study_with_me.home.utils.HomeUtils;
 
 @Service
@@ -26,5 +28,10 @@ public class HomeService {
         homeInfoResponseDto = homeUtils.searchJoinStudy(homeInfoResponseDto, memberId);
 
         return homeInfoResponseDto;
+    }
+
+    public StudySearchFilterInfo searchStudies(String topic, String difficulty, String weekDay, String type, Boolean state) {
+
+        return new StudySearchFilterInfo();
     }
 }
