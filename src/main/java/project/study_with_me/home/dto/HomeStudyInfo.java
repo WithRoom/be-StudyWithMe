@@ -19,6 +19,7 @@ public class HomeStudyInfo {
     private String topic;
     private String difficulty;
     private Integer nowPeople;
+    private Boolean finish;
     private Boolean interest;
     private Integer recruitPeople;
 }

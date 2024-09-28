@@ -28,6 +28,7 @@ public class HomeInfoResponseDto {
                 .topic(study.getTopic())
                 .title(study.getTitle())
                 .type(study.getType())
+                .finish(study.getFinish())
                 .studyImageUrl(study.getStudyImageUrl())
                 .difficulty(study.getDifficulty())
                 .nowPeople(study.getNowPeople())
@@ -48,6 +49,7 @@ public class HomeInfoResponseDto {
                 .startDay(study.getSchedule().getStartDay())
                 .studyImageUrl(study.getStudyImageUrl())
                 .studyId(study.getStudyId())
+                .finish(study.getFinish())
                 .title(study.getTitle())
                 .build();
     }

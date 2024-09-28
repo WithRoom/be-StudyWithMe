@@ -25,6 +25,7 @@ public class StudySearchFilterInfo {
                 .studyImageUrl(study.getStudyImageUrl())
                 .interest(interest)
                 .difficulty(study.getDifficulty())
+                .finish(study.getFinish())
                 .state(study.getSchedule().getState())
                 .nowPeople(study.getNowPeople())
                 .build();

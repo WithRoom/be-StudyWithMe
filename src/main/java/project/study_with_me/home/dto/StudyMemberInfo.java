@@ -15,5 +15,6 @@ public class StudyMemberInfo {
     private String studyImageUrl;
     private String title;
     private String startDay;
+    private Boolean finish;
     private Boolean state;
 }
