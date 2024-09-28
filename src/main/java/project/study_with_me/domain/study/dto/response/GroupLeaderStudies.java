@@ -26,6 +26,7 @@ public class GroupLeaderStudies {
                 .nowPeople(study.getNowPeople())
                 .difficulty(study.getDifficulty())
                 .recruitPeople(study.getRecruitPeople())
+                .finish(study.getFinish())
                 .interest(interest)
                 .build();
     }
@@ -45,6 +46,7 @@ public class GroupLeaderStudies {
         private String title;
         private Integer recruitPeople;   // 참여인원
         private Integer nowPeople;  // 현재인원
+        private Boolean finish; // 마감
         private Boolean interest;
     }
 }

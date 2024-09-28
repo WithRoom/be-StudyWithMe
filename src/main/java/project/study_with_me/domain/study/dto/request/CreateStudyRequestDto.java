@@ -37,6 +37,7 @@ public class CreateStudyRequestDto {
                 .period(studySchedule.getPeriod())
                 .startDay(studySchedule.getStartDay())
                 .weekDay(studySchedule.getWeekDay())
+                .endDay(studySchedule.getEndDay())
                 .state(true)
                 .build();
     }

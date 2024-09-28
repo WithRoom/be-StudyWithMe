@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Getter
 @Table(name = "schedule")
@@ -23,7 +24,10 @@ public class Schedule {
     private String weekDay; // 요일
 
     @Column(name = "start_day")
-    private String startDay;
+    private String startDay;    // 신청 및 스터디 생성 시작일
+
+    @Column(name = "end_day")
+    private LocalDate endDay;   // 신청 마감일
 
     @Column(name = "period")
     private String period;  // 기간

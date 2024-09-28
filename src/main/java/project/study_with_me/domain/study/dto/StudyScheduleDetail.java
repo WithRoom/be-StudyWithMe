@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
@@ -13,6 +15,7 @@ public class StudyScheduleDetail {
 
     private Boolean state;
     private String startDay;
+    private LocalDate endDay;
     private String weekDay;
     private String time;
     private Integer nowPeople;

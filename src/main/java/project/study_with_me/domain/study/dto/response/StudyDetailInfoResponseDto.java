@@ -42,6 +42,7 @@ public class StudyDetailInfoResponseDto {
                 .title(study.getTitle())
                 .introduction(study.getIntroduction())
                 .difficulty(study.getDifficulty())
+                .finish(study.getFinish())
                 .build();
     }
 
@@ -59,6 +60,7 @@ public class StudyDetailInfoResponseDto {
                 .recruitPeople(study.getRecruitPeople())
                 .weekDay(study.getSchedule().getWeekDay())
                 .startDay(study.getSchedule().getStartDay())
+                .endDay(study.getSchedule().getEndDay())
                 .nowPeople(study.getNowPeople())
                 .state(study.getSchedule().getState())
                 .period(study.getSchedule().getPeriod())

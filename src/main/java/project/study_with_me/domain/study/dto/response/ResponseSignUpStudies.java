@@ -30,6 +30,7 @@ public class ResponseSignUpStudies {
                 .title(study.getTitle())
                 .nowPeople(study.getNowPeople())
                 .topic(study.getTopic())
+                .finish(study.getFinish())
                 .difficulty(study.getDifficulty())
                 .recruitPeople(study.getRecruitPeople())
                 .interest(interest)
@@ -51,6 +52,7 @@ public class ResponseSignUpStudies {
         private String title;
         private Integer recruitPeople;   // 참여인원
         private Integer nowPeople;  // 현재인원
+        private Boolean finish; // 마감
         private Boolean interest;
         private Long memberId;
         private String nickName;

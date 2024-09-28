@@ -20,4 +20,5 @@ public class StudyDetail {
     private Boolean state;
     private String introduction;
     private Integer recruitPeople;
+    private Boolean finish;
 }
