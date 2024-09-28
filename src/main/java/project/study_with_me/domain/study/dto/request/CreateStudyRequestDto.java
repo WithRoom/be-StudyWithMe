@@ -26,6 +26,7 @@ public class CreateStudyRequestDto {
                 .introduction(studyInfo.getIntroduction())
                 .recruitPeople(studyInfo.getRecruitPeople())
                 .difficulty(studyInfo.getDifficulty())
+                .finish(false)
                 .build();
     }
 

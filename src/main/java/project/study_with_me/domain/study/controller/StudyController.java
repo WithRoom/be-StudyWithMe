@@ -77,4 +77,10 @@ public class StudyController {
     public ResponseEntity<StudyDetailInfoResponseDto> studyDetailInfo(@RequestBody StudyDetailRequestDto studyDetailRequestDto) {
         return ResponseEntity.ok(studyService.studyDetailInfo(studyDetailRequestDto));
     }
+
+    @Operation(summary = "스터디 마감 신청")
+    @PostMapping("/finish")
+    public ResponseEntity<Boolean> studyFinish(@RequestBody StudyFinishRequestDto studyFinishRequestDto) {
+        return ResponseEntity.ok(studyService.studyFinish(studyFinishRequestDto, SecurityUtil.getCurrentMemberId()));
+    }
 }

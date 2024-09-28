@@ -51,12 +51,19 @@ public class Study {
     @Column(name = "now_people")
     private Integer nowPeople;
 
+    @Column(name = "finish")
+    private Boolean finish; // 마감
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "schedule_id", referencedColumnName = "schedule_id")
     private Schedule schedule;
 
     public void updateStudyNowPeople() {
         this.nowPeople++;
+    }
+
+    public void finishStudy() {
+        this.finish = true;
     }
 
     // 연관관계 편의 메소드

@@ -149,4 +149,15 @@ public class StudyService {
 
         return studyDetailInfoResponseDto;
     }
+
+    @Transactional
+    public Boolean studyFinish(StudyFinishRequestDto studyFinishRequestDto, Long memberId) {
+        Study study = studyUtils.findStudy(studyFinishRequestDto.getStudyId());
+        if (study.getGroupLeader().equals(memberId)) {  // 그룹장 체크
+            study.finishStudy();
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
