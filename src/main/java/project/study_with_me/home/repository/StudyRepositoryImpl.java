@@ -22,7 +22,7 @@ public class StudyRepositoryImpl implements StudyRepositoryCustom {
         return queryFactory.selectFrom(study)
                 .leftJoin(study.schedule, schedule)
                 .where(
-                        eqTopic(topic),
+                        containsTopic(topic),
                         eqDifficulty(difficulty),
                         eqWeekDay(weekDay),
                         eqType(type),
@@ -31,8 +31,8 @@ public class StudyRepositoryImpl implements StudyRepositoryCustom {
                 .fetch();
     }
 
-    private BooleanExpression eqTopic(String topic) {
-        return topic != null ? study.topic.eq(topic) : null;
+    private BooleanExpression containsTopic(String topic) {
+        return topic != null ? study.topic.contains(topic) : null;
     }
 
     private BooleanExpression eqDifficulty(String difficulty) {

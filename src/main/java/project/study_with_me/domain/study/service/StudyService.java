@@ -18,6 +18,7 @@ import project.study_with_me.domain.study.repository.StudyMemberRepository;
 import project.study_with_me.domain.study.repository.StudyRepository;
 import project.study_with_me.domain.study.utils.DtoUtils;
 import project.study_with_me.domain.study.utils.StudyUtils;
+import project.study_with_me.mail.service.MailService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +36,7 @@ public class StudyService {
     private final CommentRepository commentRepository;
     private final StudyUtils studyUtils;
     private final MemberUtils memberUtils;
+    private final MailService mailService;
 
     @Transactional
     public Boolean createStudy(CreateStudyRequestDto createStudyRequestDto, Long memberId) {
@@ -82,6 +84,9 @@ public class StudyService {
             StudyJoin studyJoin = studyJoinRequestDto.createStudyJoin(memberId, study.getGroupLeader());
             studyJoinRepository.save(studyJoin);
 
+            Member member = memberUtils.findMember(studyJoin.getGroupLeaderId());
+            mailService.sendRequestEmailNotice(member.getEmail(), study.getTitle());   // 메일 전송
+
             return true;
         }
     }
@@ -89,16 +94,22 @@ public class StudyService {
     @Transactional
     public Boolean responseJoinStudy(JoinStudyRequestDto joinStudyRequestDto) {
         StudyJoin studyJoin = studyUtils.findStudyJoin(joinStudyRequestDto.getStudyId(), joinStudyRequestDto.getMemberId());
+        Member member = memberUtils.findMember(joinStudyRequestDto.getMemberId());
+        Study study = studyUtils.findStudy(joinStudyRequestDto.getStudyId());
 
+        Boolean check = false;
         if (joinStudyRequestDto.getState().equals(true)) {  // 참여 수락
             StudyMember studyMember = joinStudyRequestDto.createStudyMember();
             studyMemberRepository.save(studyMember);
 
-            Study study = studyUtils.findStudy(joinStudyRequestDto.getStudyId());
             study.updateStudyNowPeople();
+
+            check = true;
         }
 
         studyJoinRepository.delete(studyJoin);
+
+        mailService.sendAcceptEmailNotice(member.getEmail(), check, study.getTitle());    // 메일 전송
 
         return true;
     }
