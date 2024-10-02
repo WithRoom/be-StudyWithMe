@@ -85,7 +85,7 @@ public class StudyService {
             studyJoinRepository.save(studyJoin);
 
             Member member = memberUtils.findMember(studyJoin.getGroupLeaderId());
-            mailService.sendRequestEmailNotice(member.getEmail(), study.getTitle());   // 메일 전송
+            mailService.sendRequestEmailNotice(member.getEmail(), study.getTitle(), member.getName());   // 메일 전송
 
             return true;
         }
@@ -109,7 +109,7 @@ public class StudyService {
 
         studyJoinRepository.delete(studyJoin);
 
-        mailService.sendAcceptEmailNotice(member.getEmail(), check, study.getTitle());    // 메일 전송
+        mailService.sendAcceptEmailNotice(member.getEmail(), check, study.getTitle(), member.getName());    // 메일 전송
 
         return true;
     }

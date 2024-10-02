@@ -21,13 +21,13 @@ public class MailService {
     private final SpringTemplateEngine templateEngine;
 
     @Async
-    public void sendRequestEmailNotice(String email, String studyTitle){
+    public void sendRequestEmailNotice(String email, String studyTitle, String name){
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         try {
-            MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, false, "UTF-8");
+            MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
             mimeMessageHelper.setTo(email); // 메일 수신자
             mimeMessageHelper.setSubject(studyTitle + " 스터디에 참여 신청이 왔습니다."); // 메일 제목
-            mimeMessageHelper.setText(setRequestContext(studyTitle, "request"), true); // 메일 본문 내용, HTML 여부
+            mimeMessageHelper.setText(setRequestContext(studyTitle, name, "request"), true); // 메일 본문 내용, HTML 여부
             javaMailSender.send(mimeMessage);
 
             log.info("Succeeded to send Email");
@@ -38,7 +38,7 @@ public class MailService {
     }
 
     @Async
-    public void sendAcceptEmailNotice(String email, Boolean check, String studyTitle){
+    public void sendAcceptEmailNotice(String email, Boolean check, String studyTitle, String name){
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         try {
             MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, false, "UTF-8");
@@ -47,11 +47,11 @@ public class MailService {
             if (check.equals(false)) {
                 mimeMessageHelper.setText(setAcceptContext(
                         "신청하신 " + studyTitle + " 스터디 요청이 거절되었습니다.",
-                        "accept"), true); // 메일 본문 내용, HTML 여부
+                        "accept", name), true); // 메일 본문 내용, HTML 여부
             } else {
                 mimeMessageHelper.setText(setAcceptContext(
                         "신청하신 " + studyTitle + "스터디 요청이 수락되었습니다.",
-                        "accept"), true); // 메일 본문 내용, HTML 여부
+                        "accept", name), true); // 메일 본문 내용, HTML 여부
             }
             javaMailSender.send(mimeMessage);
 
@@ -63,16 +63,18 @@ public class MailService {
     }
 
     //thymeleaf를 통한 html 적용
-    public String setRequestContext(String studyTitle, String template) {
+    public String setRequestContext(String studyTitle, String name, String template) {
         Context context = new Context();
         context.setVariable("study", studyTitle);
+        context.setVariable("name", name);
         return templateEngine.process(template, context);
     }
 
     //thymeleaf를 통한 html 적용
-    public String setAcceptContext(String check, String template) {
+    public String setAcceptContext(String check, String template, String name) {
         Context context = new Context();
         context.setVariable("check", check);
+        context.setVariable("name", name);
         return templateEngine.process(template, context);
     }
 }
