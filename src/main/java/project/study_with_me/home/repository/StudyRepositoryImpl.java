@@ -24,9 +24,8 @@ public class StudyRepositoryImpl implements StudyRepositoryCustom {
                 .where(
                         containsTopic(topic),
                         eqDifficulty(difficulty),
-                        eqWeekDay(weekDay),
-                        eqType(type),
-                        eqState(state)
+                        containsWeekDay(weekDay),
+                        eqType(type)
                 )
                 .fetch();
     }
@@ -39,15 +38,11 @@ public class StudyRepositoryImpl implements StudyRepositoryCustom {
         return difficulty != null ? study.difficulty.eq(difficulty) : null;
     }
 
-    private BooleanExpression eqWeekDay(String weekDay) {
-        return weekDay != null ? study.schedule.weekDay.eq(weekDay) : null;
+    private BooleanExpression containsWeekDay(String weekDay) {
+        return weekDay != null ? study.schedule.weekDay.contains(weekDay) : null;
     }
 
     private BooleanExpression eqType(String type) {
         return type != null ? study.type.eq(type) : null;
-    }
-
-    private BooleanExpression eqState(Boolean state) {
-        return state != null ? study.schedule.state.eq(state) : null;
     }
 }
