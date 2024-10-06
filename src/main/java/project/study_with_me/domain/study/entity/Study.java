@@ -36,7 +36,7 @@ public class Study {
     @Column(name = "recruit_people")
     private Integer recruitPeople; // 모집 인원
 
-    @Column(name = "introduction")
+    @Column(name = "introduction", columnDefinition = "TEXT")
     private String introduction;    // 소개
 
     @Column(name = "topic")
