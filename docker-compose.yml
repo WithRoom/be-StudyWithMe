@@ -19,7 +19,7 @@ services:
     image: ing3616062/app-test-0.0.1-snapshot
     container_name: app-container
     ports:
-      - 443:8080
+      - 8080:8080
     env_file:
       - "./.env"
     environment:
@@ -34,6 +34,7 @@ services:
 
 networks:
   spring-network:
+    external: true
 
 volumes:
   mysql-data:
