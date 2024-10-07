@@ -20,7 +20,7 @@ public class KakaoLoginController {
     private final KakaoLoginService kakaoLoginService;
 
     @Operation(summary = "Kakao OAuth Login(회원 가입 및 로그인)")
-    @PostMapping("/kakao/login")
+    @RequestMapping("/kakao/login")
     public ResponseEntity<KakaoLoginResponseDto> loginKakao(@RequestBody KakaoLoginRequestDto kakaoLoginRequestDto) {
         return ResponseEntity.ok(kakaoLoginService.getAccessTokenFromKakao(kakaoLoginRequestDto.getCode()));
     }
