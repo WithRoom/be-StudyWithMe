@@ -16,7 +16,7 @@ import static project.study_with_me.auth.jwt.utils.SecurityUtil.*;
 
 @Tag(name = "홈 화면", description = "홈 화면 및 검색 필터링")
 @RestController
-@RequestMapping("/home")
+@RequestMapping("/api/home")
 @RequiredArgsConstructor
 public class HomeController {
 

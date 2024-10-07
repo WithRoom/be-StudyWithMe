@@ -14,7 +14,7 @@ import project.study_with_me.auth.service.KakaoLoginService;
 @Tag(name = "Auth", description = "Login")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/oauth")
+@RequestMapping("/api/oauth")
 public class KakaoLoginController {
 
     private final KakaoLoginService kakaoLoginService;

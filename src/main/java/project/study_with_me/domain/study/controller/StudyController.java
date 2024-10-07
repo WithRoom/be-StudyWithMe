@@ -13,7 +13,7 @@ import project.study_with_me.domain.study.service.StudyService;
 @Tag(name = "Study", description = "스터디 생성 및 조회")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/study")
+@RequestMapping("/api/study")
 public class StudyController {
 
     private final StudyService studyService;
