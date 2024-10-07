@@ -16,7 +16,7 @@ import project.study_with_me.s3.service.S3Service;
 @Tag(name = "Image", description = "Image Upload, Update, Delete")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/image")
+@RequestMapping("/image")
 public class S3Controller {
 
     private final S3Service s3Service;

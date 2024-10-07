@@ -15,7 +15,7 @@ import project.study_with_me.domain.comment.service.CommentService;
 
 @Tag(name = "Comment", description = "댓글 생성 및 삭제")
 @RestController
-@RequestMapping("/api/comment")
+@RequestMapping("/comment")
 @RequiredArgsConstructor
 public class CommentController {
 
