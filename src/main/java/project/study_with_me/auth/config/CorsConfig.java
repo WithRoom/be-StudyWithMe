@@ -15,7 +15,7 @@ public class CorsConfig {
 
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
-        config.addAllowedOrigin("https://withroom.store");
+        config.addAllowedOrigin("https://www.withroom.store");
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
         source.registerCorsConfiguration("/**", config);
