@@ -34,6 +34,9 @@ public class SecurityConfig {
                 // token을 사용하는 방식이기 때문에 csrf를 disable
                 .csrf().disable()
 
+                .cors()
+                .and()
+
                 // exception handling 을 할 때 우리가 만든 클래스를 추가
                 .exceptionHandling()
                 .authenticationEntryPoint(jwtAuthenticationEntryPoint)
