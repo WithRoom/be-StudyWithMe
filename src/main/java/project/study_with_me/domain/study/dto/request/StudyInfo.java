@@ -17,4 +17,5 @@ public class StudyInfo {
     private String topic;   // 주제
     private String difficulty;  // 난이도
     private String tag; // 검색 태그
+    private String kakaoOpenChatUrl;
 }

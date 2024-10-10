@@ -83,4 +83,10 @@ public class StudyController {
     public ResponseEntity<Boolean> studyFinish(@RequestBody StudyFinishRequestDto studyFinishRequestDto) {
         return ResponseEntity.ok(studyService.studyFinish(studyFinishRequestDto, SecurityUtil.getCurrentMemberId()));
     }
+
+    @Operation(summary = "스터디 삭제")
+    @PostMapping("/delete")
+    public ResponseEntity<Boolean> studyDelete(@RequestBody StudyDeleteRequestDto studyDeleteRequestDto) {
+        return ResponseEntity.ok(studyService.studyDelete(studyDeleteRequestDto, SecurityUtil.getCurrentMemberId()));
+    }
 }

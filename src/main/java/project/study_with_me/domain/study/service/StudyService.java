@@ -109,7 +109,7 @@ public class StudyService {
 
         studyJoinRepository.delete(studyJoin);
 
-        mailService.sendAcceptEmailNotice(member.getEmail(), check, study.getTitle(), member.getName());    // 메일 전송
+        mailService.sendAcceptEmailNotice(member.getEmail(), check, study.getTitle(), member.getName(), study.getKakaoOpenChanUrl());    // 메일 전송
 
         return true;
     }
@@ -170,5 +170,11 @@ public class StudyService {
         } else {
             return false;
         }
+    }
+
+    public Boolean studyDelete(StudyDeleteRequestDto studyDeleteRequestDto, Long memberId) {
+
+
+        return null;
     }
 }

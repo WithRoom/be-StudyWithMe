@@ -27,6 +27,7 @@ public class CreateStudyRequestDto {
                 .recruitPeople(studyInfo.getRecruitPeople())
                 .difficulty(studyInfo.getDifficulty())
                 .finish(false)
+                .kakaoOpenChanUrl(studyInfo.getKakaoOpenChatUrl())
                 .build();
     }
 

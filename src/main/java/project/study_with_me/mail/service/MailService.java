@@ -38,21 +38,13 @@ public class MailService {
     }
 
     @Async
-    public void sendAcceptEmailNotice(String email, Boolean check, String studyTitle, String name){
+    public void sendAcceptEmailNotice(String email, Boolean check, String studyTitle, String name, String kakaoOpenChatUrl){
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         try {
             MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, false, "UTF-8");
             mimeMessageHelper.setTo(email); // 메일 수신자
             mimeMessageHelper.setSubject(studyTitle + " 스터디 참여 신청 결과"); // 메일 제목
-            if (check.equals(false)) {
-                mimeMessageHelper.setText(setAcceptContext(
-                        "신청하신 " + studyTitle + " 스터디 요청이 거절되었습니다.",
-                        "accept", name), true); // 메일 본문 내용, HTML 여부
-            } else {
-                mimeMessageHelper.setText(setAcceptContext(
-                        "신청하신 " + studyTitle + "스터디 요청이 수락되었습니다.",
-                        "accept", name), true); // 메일 본문 내용, HTML 여부
-            }
+                mimeMessageHelper.setText(setAcceptContext(check, "accept", name, kakaoOpenChatUrl), true); // 메일 본문 내용, HTML 여부
             javaMailSender.send(mimeMessage);
 
             log.info("Succeeded to send Email");
@@ -71,10 +63,11 @@ public class MailService {
     }
 
     //thymeleaf를 통한 html 적용
-    public String setAcceptContext(String check, String template, String name) {
+    public String setAcceptContext(Boolean check, String template, String name, String kakaoOpenChatUrl) {
         Context context = new Context();
         context.setVariable("check", check);
         context.setVariable("name", name);
+        context.setVariable("chat", kakaoOpenChatUrl);
         return templateEngine.process(template, context);
     }
 }

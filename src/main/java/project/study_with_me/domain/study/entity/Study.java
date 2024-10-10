@@ -54,6 +54,9 @@ public class Study {
     @Column(name = "finish")
     private Boolean finish; // 마감
 
+    @Column(name = "kakao_open_chat_url")
+    private String kakaoOpenChanUrl;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "schedule_id", referencedColumnName = "schedule_id")
     private Schedule schedule;

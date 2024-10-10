@@ -1,17 +1,5 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
-<body>
-<div style="margin:100px;">
-    <h1>스터디 신청 결과</h1>
-    <br>
-    <p th:text="|${check}|">신청 결과</p>
-</div>
-</body>
-</html>
-
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,13 +15,24 @@
     <!-- Email Body -->
     <div style="padding: 20px; line-height: 1.6;">
         <strong><p th:text="|안녕하세요, ${name} 님|" style="margin: 10px 0; font-size: 16px;">안녕하세요.</p></strong>
-        <p th:text="|${check}|" style="margin: 10px 0; font-size: 16px;">스터디 신청 결과입니다.</p>
+
+        <!-- 스터디 결과 메시지 -->
+        <p th:if="${check == 'true'}" style="margin: 10px 0; font-size: 16px;">축하합니다! 스터디에 수락되었습니다.</p>
+
+        <p th:if="${check == 'false'}" style="margin: 10px 0; font-size: 16px;">죄송합니다. 스터디 신청이 거절되었습니다.</p>
+
+        <!-- 수락 시 카카오톡 오픈 채팅방 URL 표시 -->
+        <p th:if="${check == 'true'}" style="margin: 10px 0; font-size: 16px;">스터디 오픈 채팅방에 참여하려면 아래 링크를 클릭하세요.</p>
+
+        <div th:if="${check == 'true'}" style="text-align: center; margin: 20px 0;">
+            <a th:href="${chat}" style="background-color: #FEE500; color: black; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-size: 16px;">카카오톡 오픈채팅방 참여하기</a>
+        </div>
 
         <p style="margin: 10px 0; font-size: 16px;">스터디에 대한 더 많은 정보를 확인하고 싶다면 아래 버튼을 클릭하세요.</p>
 
         <!-- Call to Action Button -->
         <div style="text-align: center; margin: 20px 0;">
-            <a href="https://www.naver.com" style="background-color: #4CAF50; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-size: 16px;">WithRoom에서 확인하기</a>
+            <a href="https://www.withroom.store" style="background-color: #4CAF50; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-size: 16px;">WithRoom에서 확인하기</a>
         </div>
     </div>
 
