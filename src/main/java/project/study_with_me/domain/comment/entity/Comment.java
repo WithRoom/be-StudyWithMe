@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -30,4 +31,8 @@ public class Comment {
 
     @Column(name = "anonymous")
     private Boolean anonymous;  // 익명
+
+    @Column(name = "comment_date_time")
+    private LocalDateTime commentDateTime;
+
 }

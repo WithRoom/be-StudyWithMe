@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import project.study_with_me.auth.jwt.utils.SecurityUtil;
 import project.study_with_me.domain.comment.entity.Comment;
 
+import java.time.LocalDateTime;
+
 @Schema(name = "댓글 생성 Request")
 @Getter
 @AllArgsConstructor
@@ -23,6 +25,7 @@ public class CommentCreateRequestDto {
                 .studyId(studyId)
                 .memberId(SecurityUtil.getCurrentMemberId())
                 .anonymous(anonymous)
+                .commentDateTime(LocalDateTime.now())
                 .build();
     }
 }

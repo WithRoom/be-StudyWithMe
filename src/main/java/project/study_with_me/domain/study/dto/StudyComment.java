@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,4 +19,5 @@ public class StudyComment {
     private String profileImage;
     private String content;
     private Boolean anonymous;
+    private LocalDateTime commentDateTime;
 }
