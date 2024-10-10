@@ -172,9 +172,15 @@ public class StudyService {
         }
     }
 
+    @Transactional
     public Boolean studyDelete(StudyDeleteRequestDto studyDeleteRequestDto, Long memberId) {
+        Study study = studyUtils.findStudy(studyDeleteRequestDto.getStudyId());
 
-
-        return null;
+        if (study.getGroupLeader().equals(memberId)) {
+            studyRepository.delete(study);
+            return true;
+        } else {
+            return false;
+        }
     }
 }

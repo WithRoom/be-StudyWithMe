@@ -5,5 +5,5 @@ import lombok.Getter;
 @Getter
 public class StudyDeleteRequestDto {
 
-    private String studyId;
+    private Long studyId;
 }
