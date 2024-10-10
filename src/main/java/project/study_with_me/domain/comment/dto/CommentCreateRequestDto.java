@@ -15,12 +15,14 @@ public class CommentCreateRequestDto {
 
     private Long studyId;
     private String content;
+    private Boolean anonymous;
 
     public Comment createComment() {
         return Comment.builder()
                 .content(content)
                 .studyId(studyId)
                 .memberId(SecurityUtil.getCurrentMemberId())
+                .anonymous(anonymous)
                 .build();
     }
 }

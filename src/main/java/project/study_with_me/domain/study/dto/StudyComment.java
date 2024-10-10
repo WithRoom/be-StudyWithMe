@@ -16,4 +16,5 @@ public class StudyComment {
     private String nickName;
     private String profileImage;
     private String content;
+    private Boolean anonymous;
 }

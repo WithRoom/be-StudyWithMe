@@ -27,4 +27,7 @@ public class Comment {
 
     @Column(name = "study_id")
     private Long studyId;
+
+    @Column(name = "anonymous")
+    private Boolean anonymous;  // 익명
 }

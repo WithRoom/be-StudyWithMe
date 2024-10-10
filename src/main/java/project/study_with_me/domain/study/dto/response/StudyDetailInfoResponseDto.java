@@ -74,6 +74,7 @@ public class StudyDetailInfoResponseDto {
                 .content(comment.getContent())
                 .profileImage(member.getProfileImage())
                 .commentId(comment.getCommentId())
+                .anonymous(comment.getAnonymous())
                 .build();
     }
 
