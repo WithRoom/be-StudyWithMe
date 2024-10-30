@@ -30,6 +30,14 @@ public class StudyRepositoryImpl implements StudyRepositoryCustom {
                 .fetch();
     }
 
+    @Override
+    public List<Study> findByTitles(String title) {
+        return queryFactory.selectFrom(study)
+                .leftJoin(study.schedule, schedule)
+                .where(containsTitle(title))
+                .fetch();
+    }
+
     private BooleanExpression containsTopic(String topic) {
         return topic != null ? study.topic.contains(topic) : null;
     }
@@ -44,5 +52,9 @@ public class StudyRepositoryImpl implements StudyRepositoryCustom {
 
     private BooleanExpression eqType(String type) {
         return type != null ? study.type.eq(type) : null;
+    }
+
+    private BooleanExpression containsTitle(String title) {
+        return title != null ? study.title.contains(title) : null;
     }
 }

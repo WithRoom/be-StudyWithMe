@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface StudyRepositoryCustom {
     List<Study> findByFilters(String topic, String difficulty, String weekDay, String type, Boolean state);
+
+    List<Study> findByTitles(String title);
 }

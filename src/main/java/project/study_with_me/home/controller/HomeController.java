@@ -39,4 +39,10 @@ public class HomeController {
     ) {
         return ResponseEntity.ok(homeService.searchStudies(topic, difficulty, weekDay, type, state, getCurrentMemberId()));
     }
+
+    @Operation(summary = "스터디 제목 조회")
+    @GetMapping("/filter/title")
+    public ResponseEntity<StudySearchFilterInfo> searchTitleStudies(@RequestParam(required = false) String title) {
+        return ResponseEntity.ok(homeService.searchTitleStudies(title, getCurrentMemberId()));
+    }
 }

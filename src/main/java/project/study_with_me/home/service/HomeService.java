@@ -54,4 +54,20 @@ public class HomeService {
 
         return studySearchFilterInfo;
     }
+
+    public StudySearchFilterInfo searchTitleStudies(String title, Long memberId) {
+        StudySearchFilterInfo studySearchFilterInfo = new StudySearchFilterInfo();
+        List<HomeStudyInfo> homeStudyInfoList = new ArrayList<>();
+
+        List<Study> studyFilterList = studyRepository.findByTitles(title);
+
+        for (Study study : studyFilterList) {
+            Boolean interest = dtoUtils.getInterest(memberId, study.getStudyId());
+            homeStudyInfoList.add(studySearchFilterInfo.createHomeStudyInfo(study, interest));
+        }
+
+        studySearchFilterInfo.setHomeStudyInfoList(homeStudyInfoList);
+
+        return studySearchFilterInfo;
+    }
 }
